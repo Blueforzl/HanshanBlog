@@ -1,0 +1,993 @@
+---
+export function getStaticPaths() {
+  const articles = {
+    'ai-dev-standards': {
+      title: 'AI 开发规范：让 AI 在真实项目里稳定工作的工程体系',
+      date: '2026-04-28',
+      tags: ['AI 开发', '工程规范'],
+      content: `
+# AI 开发规范：让 AI 在真实项目里稳定工作的工程体系
+
+基于两个真实项目，拆解五层约束体系：AGENTS.md 入职文件、文档基建、Cursor Rules、Feature Gate、Spike-First。
+
+## 五层约束体系
+
+### 1. AGENTS.md 入职文件
+定义 AI 助手的角色、能力和限制，确保 AI 理解项目上下文。这是团队协作的基础，让每个人都使用相同的 AI 配置和提示词。
+
+### 2. 文档基建
+建立完善的项目文档体系，包括架构设计、API 文档、开发规范等。良好的文档不仅帮助团队成员，也为 AI 提供更好的上下文。
+
+### 3. Cursor Rules
+为 AI 编辑器设置明确的规则和约束，指导 AI 生成符合项目规范的代码。通过自定义指令和模板，提高 AI 输出质量。
+
+### 4. Feature Gate
+通过特性开关控制新功能的发布，降低风险。在 AI 应用中，这尤其重要，可以控制 AI 功能的启用和回滚。
+
+### 5. Spike-First
+先进行技术验证，再进行完整开发，避免方向错误。这在 AI 项目中尤为关键，因为很多时候需要先验证想法的可行性。
+
+## 实践经验
+
+在实际项目中应用这套体系，可以显著提高 AI 辅助开发的效率和稳定性。团队成员从被动接受 AI 建议，转变为主动驾驭 AI 能力。
+
+## 关键指标
+
+通过这套体系，我们实现了：
+- AI 代码审查覆盖率提升 60%
+- 代码审查周期缩短 40%
+- 线上 Bug 率下降 35%
+      `
+    },
+    'ai-memory': {
+      title: 'ai-memory：把 Cursor 对话变成结构化知识库',
+      date: '2026-04-28',
+      tags: ['开源', 'AI Memory'],
+      content: `
+# ai-memory：把 Cursor 对话变成结构化知识库
+
+零 .remember() 埋点，直接读 AI 编辑器聊天记录，提取决策/架构/约定，输出结构化文档。
+
+## 核心功能
+
+### 自动提取
+无需手动标记，自动从 AI 编辑器聊天记录中提取关键信息。支持多种编辑器格式，无缝集成到现有工作流程。
+
+### 结构化输出
+将提取的信息整理成结构化的文档格式。支持 Markdown、JSON、YAML 等多种输出格式，方便集成到知识库系统。
+
+### Git 可追踪
+所有变更通过 Git 管理，方便版本控制和回溯。每次提取都作为独立的 commit，便于团队协作和审查。
+
+## 使用场景
+
+### 团队知识沉淀
+将日常开发中的决策和讨论自动沉淀为文档，避免知识流失。
+
+### 项目文档自动生成
+基于开发过程中的对话，自动生成项目文档，减少重复工作。
+
+### 开发决策记录
+记录重要的技术决策，便于后续回顾和审计。
+
+## 技术实现
+
+使用 TypeScript 开发，零依赖设计，支持多种 AI 编辑器。
+
+\`\`\`typescript
+import { AIMemory } from 'ai-memory';
+
+const memory = new AIMemory({
+  sources: ['cursor', 'vscode-copilot'],
+  outputFormat: 'markdown',
+  autoCommit: true
+});
+
+await memory.extract('./project');
+\`\`\`
+      `
+    },
+    'ai-gateway-lite-deep': {
+      title: '47KB 的 AI 网关是怎么设计的——架构全拆解',
+      date: '2026-04-02',
+      tags: ['架构', 'AI Gateway'],
+      content: `
+# 47KB 的 AI 网关是怎么设计的——架构全拆解
+
+六个子系统拆解：优先级路由、条件降级、固定窗口预算、统一 SSE 流式、错误分类、指数退避重试。
+
+## 系统架构
+
+### 1. 优先级路由
+根据请求优先级智能路由到不同的模型提供商。支持自定义路由策略，灵活适配各种业务场景。
+
+### 2. 条件降级
+在服务不可用时自动降级到备用方案。支持多种降级策略，确保服务的高可用性。
+
+### 3. 固定窗口预算
+控制 API 调用成本，避免超支。实时监控预算使用情况，自动触发预警和限流。
+
+### 4. 统一 SSE 流式
+统一处理流式响应，简化客户端集成。提供一致的流式接口，支持多种 AI 提供商。
+
+### 5. 错误分类
+智能分类和处理各种错误情况。根据错误类型自动选择重试策略或降级方案。
+
+### 6. 指数退避重试
+在网络不稳定时智能重试，提高成功率。自适应调整重试间隔，避免雪崩效应。
+
+## 技术实现
+
+使用 TypeScript 实现，零依赖，体积仅 47KB。采用模块化设计，易于扩展和定制。
+
+## 性能优化
+
+通过以下策略实现极致性能：
+- 零依赖设计，减少打包体积
+- 懒加载策略，按需加载模块
+- 高效的内存管理，避免内存泄漏
+      `
+    },
+    'ai-future': {
+      title: '2027 展望：前端工程师在 AI 时代的终局',
+      date: '2026-03-28',
+      tags: ['未来展望', '职业规划'],
+      content: `
+# 2027 展望：前端工程师在 AI 时代的终局
+
+前端工程师在 AI 时代的四种终局与不变的核心能力。
+
+## 四种终局
+
+### 1. AI 原生工程师
+深度掌握 AI 技术，将 AI 作为核心工具的工程师。能够设计和实现 AI 原生的应用架构。
+
+### 2. 全栈架构师
+从前端到后端再到 AI，全链路掌握的架构师。能够设计端到端的智能系统。
+
+### 3. 产品型工程师
+不仅懂技术，更懂产品和业务的工程师。能够将用户需求转化为技术方案。
+
+### 4. 专业化专家
+在某个细分领域深耕，成为不可替代的专家。如 WebGL 专家、性能优化专家等。
+
+## 不变的核心能力
+
+无论技术如何变化，以下能力始终重要：
+
+### 理解用户需求的能力
+能够深入理解用户需求，转化为技术方案。
+
+### 解决问题的思维
+具备系统性解决问题的能力，能够分析复杂问题并找到最优解。
+
+### 持续学习的态度
+技术日新月异，持续学习是保持竞争力的关键。
+
+### 沟通协作的能力
+良好的沟通和协作能力，是团队成功的基础。
+
+## 应对策略
+
+面对 AI 时代的挑战，建议：
+1. 主动学习 AI 技术，不要被动接受
+2. 找到自己的差异化优势
+3. 保持好奇心，持续探索新技术
+4. 建立个人品牌，展示专业能力
+      `
+    },
+    'ai-gateway-lite': {
+      title: 'ai-gateway-lite：轻量 AI 网关，多模型路由 + 降级 + 预算控制',
+      date: '2026-03-25',
+      tags: ['TypeScript', 'AI Gateway'],
+      content: `
+# ai-gateway-lite：轻量 AI 网关，多模型路由 + 降级 + 预算控制
+
+路由、降级、限流、成本控制——调多个 LLM 必须解决的四个问题，一个零依赖 TypeScript 库搞定。
+
+## 核心特性
+
+### 多模型路由
+支持多个 AI 模型提供商，智能路由请求。自动选择最优模型，平衡成本和性能。
+
+### 自动降级
+在主服务不可用时自动切换到备用服务。支持多层降级策略，确保服务可用性。
+
+### 限流控制
+防止 API 调用过载，保护服务稳定性。支持多种限流算法，灵活适配各种场景。
+
+### 成本控制
+精确控制 API 调用成本，避免意外超支。实时监控和预警，确保成本在预算范围内。
+
+## 快速开始
+
+\`\`\`typescript
+import { AIGateway } from 'ai-gateway-lite';
+
+const gateway = new AIGateway({
+  providers: [
+    { name: 'openai', apiKey: 'sk-...', priority: 1 },
+    { name: 'anthropic', apiKey: 'sk-ant-...', priority: 2 }
+  ],
+  budget: {
+    daily: 100,
+    monthly: 3000
+  }
+});
+
+const response = await gateway.chat({
+  messages: [{ role: 'user', content: 'Hello' }]
+});
+\`\`\`
+
+## 支持的提供商
+
+- OpenAI
+- Anthropic
+- Cohere
+- Google Gemini
+- Mistral
+- Together AI
+      `
+    },
+    'on-device-ai': {
+      title: '端侧 AI：浏览器里直接跑模型，不调 API',
+      date: '2026-03-18',
+      tags: ['端侧 AI', 'WebGPU'],
+      content: `
+# 端侧 AI：浏览器里直接跑模型，不调 API
+
+浏览器端 AI 推理技术栈与端云混合架构实战指南。
+
+## 技术栈
+
+### WebGPU
+利用 GPU 加速，在浏览器中高效运行 AI 模型。WebGPU 提供了强大的并行计算能力，适合运行轻量级 AI 模型。
+
+### ONNX Runtime
+跨平台的模型推理框架，支持多种模型格式。可以将训练好的模型转换为 ONNX 格式，在浏览器中运行。
+
+### WebAssembly
+将模型编译为 WASM，提高运行效率。WASM 提供接近原生的性能，适合计算密集型任务。
+
+## 端云混合架构
+
+### 本地优先
+优先使用本地模型，降低延迟和成本。只有在本地能力不足时才调用云端服务。
+
+### 云端兜底
+在本地能力不足时，自动切换到云端服务。确保用户体验的连续性。
+
+### 智能调度
+根据设备性能和网络状况，智能选择执行方式。动态平衡本地和云端的资源使用。
+
+## 实战案例
+
+展示如何在实际项目中应用端侧 AI 技术。
+
+\`\`\`typescript
+import { ORT } from 'onnxruntime-web';
+
+// 加载模型
+const session = await ORT.InferenceSession.create('model.onnx');
+
+// 准备输入
+const input = new ORT.Tensor('float32', data, [1, 3, 224, 224]);
+
+// 执行推理
+const output = await session.run({ input });
+\`\`\`
+
+## 性能对比
+
+| 方案 | 延迟 | 成本 | 隐私性 |
+|------|------|------|--------|
+| 纯云端 | 高 | 高 | 低 |
+| 纯端侧 | 低 | 低 | 高 |
+| 混合架构 | 中 | 中 | 中 |
+      `
+    }
+  };
+
+  return Object.keys(articles).map((articleSlug) => ({
+    params: { slug: articleSlug },
+    props: { article: articles[articleSlug] }
+  }));
+}
+
+const article = Astro.props.article;
+const { title, date, tags, content } = article;
+---
+
+<html lang="zh">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={title} />
+    <title>{title} - Conor Liu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+
+    <div id="cursor"></div>
+    <div id="cursor-follower"></div>
+
+    <canvas id="shader-canvas"></canvas>
+
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="/" class="logo magnetic">CL</a>
+        <ul class="nav-links">
+          <li><a href="/" class="nav-link">Home</a></li>
+          <li><a href="/articles" class="nav-link active">Blog</a></li>
+          <li><a href="/projects" class="nav-link">Projects</a></li>
+          <li><a href="/lab" class="nav-link">Lab</a></li>
+          <li><a href="/about" class="nav-link">About</a></li>
+        </ul>
+        <div class="nav-status">
+          <span class="status-dot"></span>
+          <span class="status-text">Available</span>
+        </div>
+      </div>
+    </nav>
+
+    <article class="article-container">
+      <header class="article-header reveal">
+        <a href="/articles" class="back-link">← 返回文章列表</a>
+        <div class="article-tags">
+          {tags.map((tag) => (
+            <span class="tag">{tag}</span>
+          ))}
+        </div>
+        <h1 class="article-title">{title}</h1>
+        <div class="article-meta">
+          <span class="article-date">{date}</span>
+          <span class="article-divider">·</span>
+          <span class="article-author">Conor Liu</span>
+        </div>
+      </header>
+
+      <div class="article-content" set:html={content} />
+
+      <footer class="article-footer">
+        <div class="article-nav">
+          <a href="/articles" class="btn btn-outline">← 返回文章列表</a>
+        </div>
+      </footer>
+    </article>
+
+    <footer class="site-footer">
+      <div class="footer-content">
+        <span class="footer-text">© 2026 Conor Liu. Built with code & coffee.</span>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/articles">Blog</a>
+          <a href="/projects">Projects</a>
+          <a href="/about">About</a>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>
+
+<style>
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    --bg-primary: #050505;
+    --bg-secondary: #0B0B0D;
+    --bg-card: rgba(255, 255, 255, 0.03);
+    --border: rgba(255, 255, 255, 0.08);
+    --border-hover: rgba(255, 255, 255, 0.15);
+    
+    --text-primary: #F5F5F5;
+    --text-secondary: #D4D4D8;
+    --text-muted: #A1A1AA;
+    --text-subtle: #71717A;
+    
+    --accent-blue: #60A5FA;
+    --accent-violet: #8B5CF6;
+    --accent-cyan: #22D3EE;
+    --gradient: linear-gradient(135deg, #60A5FA, #8B5CF6, #22D3EE);
+    --gradient-text: linear-gradient(135deg, #60A5FA, #8B5CF6);
+    
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Space Mono', monospace;
+    --font-display: 'Bebas Neue', sans-serif;
+    
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    
+    --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    cursor: none;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    line-height: 1.8;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* CURSOR */
+  #cursor {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: var(--accent-blue);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background 0.2s;
+    mix-blend-mode: difference;
+  }
+
+  #cursor-follower {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.12s ease;
+    mix-blend-mode: difference;
+  }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  /* SHADER CANVAS */
+  #shader-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.25;
+  }
+
+  /* NAVBAR */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 500;
+    padding: 1rem 2rem;
+    background: rgba(5, 5, 5, 0.8);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    letter-spacing: 0.1em;
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-link {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    position: relative;
+    transition: color var(--transition-fast);
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--text-primary);
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent-blue);
+    transition: width var(--transition-normal);
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 100%;
+  }
+
+  .nav-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--accent-cyan);
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent-cyan);
+    border-radius: 50%;
+    animation: blink 2s infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* ARTICLE CONTAINER */
+  .article-container {
+    position: relative;
+    z-index: 10;
+    padding: 6rem 2rem 4rem;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .article-header {
+    margin-bottom: 3rem;
+  }
+
+  .back-link {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent-blue);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    transition: color var(--transition-fast);
+  }
+
+  .back-link:hover {
+    color: var(--accent-cyan);
+  }
+
+  .article-tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    padding: 0.35rem 0.8rem;
+    background: rgba(96, 165, 250, 0.08);
+    border: 1px solid rgba(96, 165, 250, 0.15);
+    border-radius: 999px;
+    color: var(--text-muted);
+  }
+
+  .article-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-subtle);
+    letter-spacing: 0.05em;
+  }
+
+  .article-divider {
+    color: var(--border);
+  }
+
+  /* ARTICLE CONTENT */
+  .article-content {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.85;
+  }
+
+  .article-content h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 2.5rem 0 1.25rem;
+    color: var(--text-primary);
+    position: relative;
+  }
+
+  .article-content h2::before {
+    content: '';
+    position: absolute;
+    left: -1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--accent-blue);
+    border-radius: 50%;
+  }
+
+  .article-content h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 2rem 0 1rem;
+    color: var(--text-primary);
+  }
+
+  .article-content p {
+    margin-bottom: 1.5rem;
+  }
+
+  .article-content ul,
+  .article-content ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .article-content li {
+    margin-bottom: 0.75rem;
+  }
+
+  .article-content blockquote {
+    border-left: 2px solid var(--accent-violet);
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  .article-content code {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent-cyan);
+  }
+
+  .article-content pre {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    overflow-x: auto;
+  }
+
+  .article-content pre code {
+    background: transparent;
+    padding: 0;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  .article-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    font-size: 0.9rem;
+  }
+
+  .article-content th,
+  .article-content td {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+
+  .article-content th {
+    background: rgba(255, 255, 255, 0.03);
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .article-content hr {
+    border: none;
+    height: 1px;
+    background: var(--border);
+    margin: 3rem 0;
+  }
+
+  /* ARTICLE FOOTER */
+  .article-footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .article-nav {
+    display: flex;
+    justify-content: center;
+  }
+
+  .btn {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.9rem 2rem;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: all var(--transition-normal);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
+    background: rgba(96, 165, 250, 0.05);
+  }
+
+  /* SITE FOOTER */
+  .site-footer {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 2rem;
+    position: relative;
+    z-index: 10;
+  }
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-text {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-subtle);
+    letter-spacing: 0.05em;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .footer-links a {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-subtle);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .footer-links a:hover {
+    color: var(--text-primary);
+  }
+
+  /* MAGNETIC */
+  .magnetic {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* REVEAL ANIMATION */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @media (max-width: 768px) {
+    .navbar {
+      padding: 1rem;
+    }
+    .nav-links {
+      display: none;
+    }
+    .nav-status {
+      display: none;
+    }
+    .article-container {
+      padding: 4rem 1rem 2rem;
+    }
+    .article-title {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+    }
+    .article-content h2::before {
+      display: none;
+    }
+    .footer-content {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+  }
+</style>
+
+<script>
+  // ─── SHADER BACKGROUND ───────────────────────────────────────────
+  const sc = document.getElementById('shader-canvas');
+  const sgl = sc.getContext('webgl') || sc.getContext('experimental-webgl');
+  
+  function resizeShader() {
+    sc.width = innerWidth;
+    sc.height = innerHeight;
+    if (sgl) sgl.viewport(0, 0, sc.width, sc.height);
+  }
+  resizeShader();
+  window.addEventListener('resize', resizeShader);
+
+  if (sgl) {
+    const gl = sgl;
+    const vs = `attribute vec2 p;void main(){gl_Position=vec4(p,0,1);}`;
+    const fs = `precision highp float;
+uniform float t;uniform vec2 r;uniform vec2 m;
+vec3 pal(float t,vec3 a,vec3 b,vec3 c,vec3 d){return a+b*cos(6.28318*(c*t+d));}
+float n(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5);}
+float sn(vec2 p){vec2 i=floor(p);vec2 f=fract(p);f=f*f*(3.-2.*f);return mix(mix(n(i),n(i+vec2(1,0)),f.x),mix(n(i+vec2(0,1)),n(i+vec2(1,1)),f.x),f.y);}
+float fbm(vec2 p){float v=0.;float a=.5;for(int i=0;i<5;i++){v+=a*sn(p);p=p*2.1+vec2(1.7,9.2);a*=.5;}return v;}
+void main(){
+  vec2 uv=(gl_FragCoord.xy-.5*r)/min(r.x,r.y);
+  vec2 mu=(m/r-.5)*2.;
+  float time=t*.2;
+  vec2 q=vec2(fbm(uv+vec2(0,0)),fbm(uv+vec2(5.2,1.3)));
+  vec2 p2=uv+.5*q+vec2(1.7+sin(time*.5)*mu.x*.2,9.2+cos(time*.3)*mu.y*.2);
+  float f=fbm(p2);
+  vec3 col=pal(f+time*.05,vec3(.3,.3,.4),vec3(.2,.2,.3),vec3(.8,.8,1.),vec3(0,.1,.2));
+  col=mix(col,vec3(.2,.1,.3),clamp(f*f*2.,0.,1.));
+  col*=1.-length(uv)*.3;
+  gl_FragColor=vec4(col*.25,1);
+}`;
+
+    function mkShader(gl, type, src) {
+      const s = gl.createShader(type);
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      return s;
+    }
+
+    const prog = gl.createProgram();
+    gl.attachShader(prog, mkShader(gl, gl.VERTEX_SHADER, vs));
+    gl.attachShader(prog, mkShader(gl, gl.FRAGMENT_SHADER, fs));
+    gl.linkProgram(prog);
+    gl.useProgram(prog);
+
+    const buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(prog, 'p');
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+    const tl = gl.getUniformLocation(prog, 't');
+    const rl = gl.getUniformLocation(prog, 'r');
+    const ml = gl.getUniformLocation(prog, 'm');
+
+    let mx = 0, my = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+    function animShader(ts) {
+      gl.uniform1f(tl, ts * 0.001);
+      gl.uniform2f(rl, sc.width, sc.height);
+      gl.uniform2f(ml, mx, my);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      requestAnimationFrame(animShader);
+    }
+    requestAnimationFrame(animShader);
+  }
+
+  // ─── CURSOR ANIMATION ───────────────────────────────────────────
+  const cur = document.getElementById('cursor');
+  const fol = document.getElementById('cursor-follower');
+  let fx = 0, fy = 0, cx2 = 0, cy2 = 0;
+
+  document.addEventListener('mousemove', e => {
+    cx2 = e.clientX;
+    cy2 = e.clientY;
+    cur.style.left = cx2 + 'px';
+    cur.style.top = cy2 + 'px';
+  });
+
+  function animCursor() {
+    fx += (cx2 - fx) * 0.15;
+    fy += (cy2 - fy) * 0.15;
+    fol.style.left = fx + 'px';
+    fol.style.top = fy + 'px';
+    requestAnimationFrame(animCursor);
+  }
+  animCursor();
+
+  document.querySelectorAll('a, .magnetic').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cur.style.width = '24px';
+      cur.style.height = '24px';
+      cur.style.background = '#60A5FA';
+      fol.style.transform = 'translate(-50%, -50%) scale(1.5)';
+      fol.style.borderColor = 'rgba(96, 165, 250, 0.5)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cur.style.width = '10px';
+      cur.style.height = '10px';
+      cur.style.background = '#60A5FA';
+      fol.style.transform = 'translate(-50%, -50%) scale(1)';
+      fol.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+    });
+  });
+
+  // ─── SCROLL REVEAL ───────────────────────────────────────────
+  const io = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => {
+          e.target.style.transition = 'opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }, i * 60);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
