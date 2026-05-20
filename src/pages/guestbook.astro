@@ -412,46 +412,114 @@ const description = "留下你的想法和建议";
   .messages-list {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.25rem;
   }
 
   .message-card {
     background: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 16px;
     padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
     transition: all var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .message-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--gradient);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
   }
 
   .message-card:hover {
     border-color: var(--border-hover);
     transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .message-card:hover::before {
+    opacity: 1;
+  }
+
+  .message-avatar {
+    flex-shrink: 0;
+  }
+
+  .avatar-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .message-body {
+    flex: 1;
+    min-width: 0;
   }
 
   .message-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 0.75rem;
+    gap: 1rem;
+  }
+
+  .message-author-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
   }
 
   .message-author {
     font-family: var(--font-mono);
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 600;
-    color: var(--accent-blue);
+    color: var(--text-primary);
   }
 
-  .message-date {
+  .message-email {
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     color: var(--text-muted);
+    opacity: 0.8;
+  }
+
+  .message-time {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  .message-time svg {
+    opacity: 0.6;
   }
 
   .message-content {
     color: var(--text-secondary);
     line-height: 1.7;
     font-size: 0.95rem;
+    word-wrap: break-word;
   }
 
   .loading {
@@ -531,6 +599,26 @@ const description = "留下你的想法和建议";
     }
     .guestbook-form {
       padding: 1.5rem;
+    }
+    .message-card {
+      padding: 1.25rem;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .message-avatar {
+      align-self: flex-start;
+    }
+    .avatar-circle {
+      width: 40px;
+      height: 40px;
+      font-size: 1rem;
+    }
+    .message-header {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .message-time {
+      align-self: flex-start;
     }
     .footer-content {
       flex-direction: column;
@@ -735,14 +823,38 @@ const description = "留下你的想法和建议";
             month: 'long',
             day: 'numeric',
           });
+          const formattedTime = date.toLocaleTimeString('zh-CN', {
+            hour: '2-digit',
+            minute: '2-digit',
+          });
+
+          // 生成头像
+          const avatar = generateAvatar(msg.name);
+          const avatarColor = getAvatarColor(msg.name);
 
           return `
             <div class="message-card reveal visible">
-              <div class="message-header">
-                <span class="message-author">${escapeHtml(msg.name)}</span>
-                <span class="message-date">${formattedDate}</span>
+              <div class="message-avatar">
+                <div class="avatar-circle" style="background: ${avatarColor}">
+                  ${avatar}
+                </div>
               </div>
-              <div class="message-content">${escapeHtml(msg.message)}</div>
+              <div class="message-body">
+                <div class="message-header">
+                  <div class="message-author-row">
+                    <span class="message-author">${escapeHtml(msg.name)}</span>
+                    ${msg.email ? `<span class="message-email">${escapeHtml(msg.email)}</span>` : ''}
+                  </div>
+                  <div class="message-time">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    <span>${formattedDate} ${formattedTime}</span>
+                  </div>
+                </div>
+                <div class="message-content">${escapeHtml(msg.message)}</div>
+              </div>
             </div>
           `;
         })
@@ -756,6 +868,42 @@ const description = "留下你的想法和建议";
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
+  }
+
+  // 生成头像文字（取姓名首字母或第一个字符）
+  function generateAvatar(name) {
+    if (!name) return '?';
+    const trimmed = name.trim();
+    if (trimmed.length === 0) return '?';
+    // 如果是中文，取第一个字；如果是英文，取首字母大写
+    if (/^[\u4e00-\u9fa5]/.test(trimmed)) {
+      return trimmed.charAt(0);
+    }
+    return trimmed.charAt(0).toUpperCase();
+  }
+
+  // 根据姓名生成头像颜色
+  function getAvatarColor(name) {
+    const colors = [
+      'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+      'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+      'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+      'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+      'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+      'linear-gradient(135deg, #d299c2 0%, #fef9d7 100%)',
+      'linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)',
+      'linear-gradient(135deg, #fddb92 0%, #d1fdff 100%)',
+      'linear-gradient(135deg, #9890e3 0%, #b1f4cf 100%)',
+    ];
+    
+    // 根据姓名哈希选择颜色
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) {
+      hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    const index = Math.abs(hash) % colors.length;
+    return colors[index];
   }
 
   // 初始加载留言
