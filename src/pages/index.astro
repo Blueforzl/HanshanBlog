@@ -1,6 +1,8 @@
 ---
-const title = "Hanshan - Full-Stack Developer";
-const description = "流水不争先，争的是滔滔不绝";
+import Navbar from '../components/Navbar.astro';
+
+const title = 'Hanshan - 全栈开发者';
+const description = '流水不争先，争的是滔滔不绝';
 ---
 
 <html lang="zh">
@@ -13,54 +15,34 @@ const description = "流水不争先，争的是滔滔不绝";
     <meta name="description" content={description} />
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-
     <div id="cursor"></div>
     <div id="cursor-follower"></div>
 
     <canvas id="shader-canvas"></canvas>
     <canvas id="particle-canvas"></canvas>
 
-    <nav class="navbar">
-      <div class="nav-container">
-        <a href="/" class="logo magnetic">HS</a>
-        <ul class="nav-links">
-          <li><a href="/" class="nav-link active">Home</a></li>
-          <li><a href="/articles" class="nav-link">Blog</a></li>
-          <li><a href="/projects" class="nav-link">Projects</a></li>
-          <li><a href="/lab" class="nav-link">Lab</a></li>
-          <li><a href="/about" class="nav-link">About</a></li>
-        </ul>
-        <div class="nav-status">
-          <span class="status-dot"></span>
-          <span class="status-text">Available</span>
-        </div>
-        <button class="menu-toggle" aria-label="Toggle menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-    </nav>
+    <Navbar activePage="home" />
 
     <section id="hero">
       <div class="hero-content">
-        <div class="hero-badge">Full-Stack Developer / AI Engineer</div>
+        <div class="hero-badge">全栈开发者 / AI 工程师</div>
         <h1 class="hero-title">
-          <span class="hero-line">Full-Stack</span>
+          <span class="hero-line">全栈</span>
           <span class="hero-line">
-            <span class="hero-gradient">Developer</span>
+            <span class="hero-gradient">开发者</span>
           </span>
           <span class="hero-line">流水不争先，争的是滔滔不绝</span>
         </h1>
-        <p class="hero-description">
-          专注于全栈开发、AI工程与创意编程，持续探索技术与设计的边界。
-        </p>
+        <p class="hero-description">专注于全栈开发、AI工程与创意编程，持续探索技术与设计的边界。</p>
         <div class="hero-cta">
-          <a href="/articles" class="btn btn-primary magnetic">Read Blog</a>
-          <a href="/projects" class="btn btn-outline magnetic">View Projects</a>
+          <a href="/articles" class="btn btn-primary magnetic">阅读博客</a>
+          <a href="/projects" class="btn btn-outline magnetic">查看项目</a>
         </div>
         <div class="hero-tags">
           <span class="tag">React</span>
@@ -72,7 +54,7 @@ const description = "流水不争先，争的是滔滔不绝";
       </div>
       <div class="scroll-hint">
         <div class="scroll-line"></div>
-        <span>Scroll</span>
+        <span>向下滚动</span>
       </div>
     </section>
 
@@ -114,8 +96,8 @@ const description = "流水不争先，争的是滔滔不绝";
 
     <section id="featured">
       <div class="section-header">
-        <span class="section-label">Featured</span>
-        <h2 class="section-title">Latest <span class="gradient-text">Writing</span></h2>
+        <span class="section-label">精选文章</span>
+        <h2 class="section-title">最新 <span class="gradient-text">文章</span></h2>
       </div>
       <div class="featured-grid">
         <article class="featured-card featured-large reveal">
@@ -123,12 +105,15 @@ const description = "流水不争先，争的是滔滔不绝";
             <canvas class="thumb-canvas" data-hue="220" data-speed="0.8"></canvas>
           </div>
           <div class="card-content">
-            <span class="card-category">AI Engineering</span>
-            <h3 class="card-title">AI Development Standards: Building Stable AI Systems in Production</h3>
-            <p class="card-excerpt">A five-layer constraint system for making AI work reliably in real projects: AGENTS.md, documentation infrastructure, Cursor Rules, Feature Gate, and Spike-First methodology.</p>
+            <span class="card-category">AI 工程</span>
+            <h3 class="card-title">AI 开发规范：在生产环境中构建稳定的 AI 系统</h3>
+            <p class="card-excerpt">
+              五层约束体系让 AI 在真实项目中可靠运行：AGENTS.md、文档基础设施、Cursor Rules、Feature Gate 和 Spike-First
+              方法论。
+            </p>
             <div class="card-meta">
-              <span class="card-date">April 28, 2026</span>
-              <span class="card-read">Read →</span>
+              <span class="card-date">2026年4月28日</span>
+              <span class="card-read">阅读 →</span>
             </div>
           </div>
         </article>
@@ -137,11 +122,11 @@ const description = "流水不争先，争的是滔滔不绝";
             <canvas class="thumb-canvas" data-hue="160" data-speed="1.2"></canvas>
           </div>
           <div class="card-content">
-            <span class="card-category">Open Source</span>
-            <h3 class="card-title">ai-memory: Turn Cursor Conversations into Knowledge Base</h3>
-            <p class="card-excerpt">Extract decisions, architecture patterns, and conventions directly from AI editor chat logs.</p>
+            <span class="card-category">开源项目</span>
+            <h3 class="card-title">ai-memory: 将 Cursor 对话转化为知识库</h3>
+            <p class="card-excerpt">直接从 AI 编辑器聊天记录中提取决策、架构模式和约定。</p>
             <div class="card-meta">
-              <span class="card-date">April 28, 2026</span>
+              <span class="card-date">2026年4月28日</span>
             </div>
           </div>
         </article>
@@ -150,31 +135,33 @@ const description = "流水不争先，争的是滔滔不绝";
             <canvas class="thumb-canvas" data-hue="280" data-speed="1.0"></canvas>
           </div>
           <div class="card-content">
-            <span class="card-category">Architecture</span>
-            <h3 class="card-title">Designing a 47KB AI Gateway</h3>
-            <p class="card-excerpt">Six subsystems: priority routing, conditional degradation, budget control, unified SSE streaming, error classification, and exponential backoff retry.</p>
+            <span class="card-category">架构设计</span>
+            <h3 class="card-title">设计一个 47KB 的 AI 网关</h3>
+            <p class="card-excerpt">
+              六个子系统：优先级路由、条件降级、预算控制、统一 SSE 流、错误分类和指数退避重试。
+            </p>
             <div class="card-meta">
-              <span class="card-date">April 2, 2026</span>
+              <span class="card-date">2026年4月2日</span>
             </div>
           </div>
         </article>
       </div>
       <div class="section-footer">
-        <a href="/articles" class="view-all">View All Articles →</a>
+        <a href="/articles" class="view-all">查看全部文章 →</a>
       </div>
     </section>
 
     <section id="projects-preview">
       <div class="section-header">
-        <span class="section-label">Selected Work</span>
-        <h2 class="section-title">Projects</h2>
+        <span class="section-label">精选作品</span>
+        <h2 class="section-title">项目</h2>
       </div>
       <div class="projects-bento">
         <div class="bento-item bento-large reveal">
           <div class="bento-content">
-            <span class="bento-tag">AI Pipeline</span>
+            <span class="bento-tag">AI 流水线</span>
             <h3 class="bento-title">ai-review-pipeline</h3>
-            <p class="bento-desc">AI-powered code quality pipeline with zero dependencies, supporting 6 major AI providers.</p>
+            <p class="bento-desc">零依赖的 AI 代码质量流水线，支持 6 大 AI 提供商。</p>
             <div class="bento-tech">
               <span>TypeScript</span>
               <span>AI</span>
@@ -184,84 +171,84 @@ const description = "流水不争先，争的是滔滔不绝";
           <div class="bento-glow"></div>
         </div>
         <div class="bento-item reveal">
-          <span class="bento-tag">Gateway</span>
+          <span class="bento-tag">网关</span>
           <h3 class="bento-title">ai-gateway-lite</h3>
-          <p class="bento-desc">Lightweight AI gateway with multi-model routing and budget control.</p>
+          <p class="bento-desc">轻量级 AI 网关，支持多模型路由和预算控制。</p>
         </div>
         <div class="bento-item reveal">
-          <span class="bento-tag">Git Tooling</span>
+          <span class="bento-tag">Git 工具</span>
           <h3 class="bento-title">ai-git-msg</h3>
-          <p class="bento-desc">AI-powered commit message generator.</p>
+          <p class="bento-desc">AI 驱动的提交信息生成器。</p>
         </div>
         <div class="bento-item reveal">
-          <span class="bento-tag">i18n</span>
+          <span class="bento-tag">国际化</span>
           <h3 class="bento-title">ai-i18n-sync</h3>
-          <p class="bento-desc">AI translation and incremental sync for internationalization.</p>
+          <p class="bento-desc">AI 翻译和增量同步，助力国际化开发。</p>
         </div>
         <div class="bento-item reveal">
-          <span class="bento-tag">Memory</span>
+          <span class="bento-tag">记忆</span>
           <h3 class="bento-title">ai-memory</h3>
-          <p class="bento-desc">Structured knowledge extraction from AI conversations.</p>
+          <p class="bento-desc">从 AI 对话中提取结构化知识。</p>
         </div>
       </div>
       <div class="section-footer">
-        <a href="/projects" class="view-all">View All Projects →</a>
+        <a href="/projects" class="view-all">查看全部项目 →</a>
       </div>
     </section>
 
     <section id="lab-preview">
       <div class="section-header">
-        <span class="section-label">Motion Lab</span>
-        <h2 class="section-title">Interactive <span class="gradient-text">Experiments</span></h2>
+        <span class="section-label">动效实验室</span>
+        <h2 class="section-title">交互式 <span class="gradient-text">实验</span></h2>
       </div>
       <div class="lab-grid">
         <div class="lab-card reveal">
           <canvas class="lab-canvas" data-type="flow"></canvas>
           <div class="lab-info">
             <span class="lab-tag">Shader</span>
-            <h3 class="lab-title">Fluid Gradient</h3>
-            <p class="lab-desc">Real-time WebGL fluid simulation</p>
+            <h3 class="lab-title">流体渐变</h3>
+            <p class="lab-desc">实时 WebGL 流体模拟</p>
           </div>
         </div>
         <div class="lab-card reveal">
           <canvas class="lab-canvas" data-type="particles"></canvas>
           <div class="lab-info">
-            <span class="lab-tag">Particles</span>
-            <h3 class="lab-title">Particle System</h3>
-            <p class="lab-desc">Interactive particle simulation</p>
+            <span class="lab-tag">粒子</span>
+            <h3 class="lab-title">粒子系统</h3>
+            <p class="lab-desc">交互式粒子模拟</p>
           </div>
         </div>
         <div class="lab-card reveal">
           <canvas class="lab-canvas" data-type="noise"></canvas>
           <div class="lab-info">
-            <span class="lab-tag">Noise</span>
-            <h3 class="lab-title">Procedural Noise</h3>
-            <p class="lab-desc">Smooth noise generation</p>
+            <span class="lab-tag">噪声</span>
+            <h3 class="lab-title">程序化噪声</h3>
+            <p class="lab-desc">平滑噪声生成</p>
           </div>
         </div>
       </div>
       <div class="section-footer">
-        <a href="/lab" class="view-all">Explore Lab →</a>
+        <a href="/lab" class="view-all">探索实验室 →</a>
       </div>
     </section>
 
     <section id="about-preview">
       <div class="about-content">
         <div class="about-text">
-          <span class="section-label">About</span>
-          <h2 class="section-title">Building <span class="gradient-text">digital experiences</span> with purpose</h2>
+          <span class="section-label">关于我</span>
+          <h2 class="section-title">有目的的构建 <span class="gradient-text">数字体验</span></h2>
           <p class="about-desc">
-            With 8+ years of experience, I've evolved from traditional frontend development to AI full-stack architecture. 
-            I'm passionate about creating beautiful, performant, and intelligent web applications that push boundaries.
+            拥有 8 年以上经验，从传统前端开发逐步转型为 AI 全栈架构师。 热衷于创建美观、高性能且智能的 Web
+            应用，不断突破技术边界。
           </p>
           <div class="about-stats">
             <div class="stat-item">
               <span class="stat-value">7+</span>
-              <span class="stat-label">Open Source Projects</span>
+              <span class="stat-label">开源项目</span>
             </div>
             <div class="stat-item">
               <span class="stat-value">70+</span>
-              <span class="stat-label">Technical Articles</span>
+              <span class="stat-label">技术文章</span>
             </div>
             <div class="stat-item">
               <span class="stat-value">2.4K</span>
@@ -279,12 +266,9 @@ const description = "流水不争先，争的是滔滔不绝";
 
     <section id="contact">
       <div class="contact-content">
-        <span class="section-label">Get in Touch</span>
-        <h2 class="section-title">Let's <span class="gradient-text">build</span> something together</h2>
-        <p class="contact-desc">
-          Available for freelance projects, full-time opportunities, and collaborations. 
-          Feel free to reach out for discussions about AI engineering, frontend development, or creative coding.
-        </p>
+        <span class="section-label">联系我</span>
+        <h2 class="section-title">一起 <span class="gradient-text">创造</span>些什么</h2>
+        <p class="contact-desc">可承接自由项目、全职机会和合作项目。 欢迎就 AI 工程、前端开发或创意编程进行讨论。</p>
         <div class="contact-links">
           <a href="mailto:Templehanshan@gmail.com" class="contact-link magnetic">
             <span class="link-icon">✉</span>
@@ -300,21 +284,22 @@ const description = "流水不争先，争的是滔滔不绝";
 
     <footer>
       <div class="footer-content">
-        <span class="footer-text">© 2026 Hanshan. Built with code & coffee.</span>
+        <span class="footer-text">© 2026 Hanshan. 用代码与咖啡构建。</span>
         <div class="footer-links">
-          <a href="/">Home</a>
-          <a href="/articles">Blog</a>
-          <a href="/projects">Projects</a>
-          <a href="/about">About</a>
+          <a href="/">首页</a>
+          <a href="/articles">博客</a>
+          <a href="/projects">项目</a>
+          <a href="/about">关于</a>
         </div>
       </div>
     </footer>
-
   </body>
 </html>
 
 <style>
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -322,34 +307,34 @@ const description = "流水不争先，争的是滔滔不绝";
 
   :root {
     --bg-primary: #050505;
-    --bg-secondary: #0B0B0D;
+    --bg-secondary: #0b0b0d;
     --bg-card: rgba(255, 255, 255, 0.03);
     --bg-card-hover: rgba(255, 255, 255, 0.05);
     --border: rgba(255, 255, 255, 0.08);
     --border-hover: rgba(255, 255, 255, 0.15);
-    
-    --text-primary: #F5F5F5;
-    --text-secondary: #D4D4D8;
-    --text-muted: #A1A1AA;
-    --text-subtle: #71717A;
-    
-    --accent-blue: #60A5FA;
-    --accent-violet: #8B5CF6;
-    --accent-cyan: #22D3EE;
-    --gradient: linear-gradient(135deg, #60A5FA, #8B5CF6, #22D3EE);
-    --gradient-text: linear-gradient(135deg, #60A5FA, #8B5CF6);
-    
+
+    --text-primary: #f5f5f5;
+    --text-secondary: #d4d4d8;
+    --text-muted: #a1a1aa;
+    --text-subtle: #71717a;
+
+    --accent-blue: #60a5fa;
+    --accent-violet: #8b5cf6;
+    --accent-cyan: #22d3ee;
+    --gradient: linear-gradient(135deg, #60a5fa, #8b5cf6, #22d3ee);
+    --gradient-text: linear-gradient(135deg, #60a5fa, #8b5cf6);
+
     --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
     --font-mono: 'JetBrains Mono', 'Space Mono', monospace;
     --font-display: 'Bebas Neue', sans-serif;
-    
+
     --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
     --shadow-hover: 0 8px 32px rgba(96, 165, 250, 0.15);
-    
+
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 16px;
-    
+
     --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -379,7 +364,10 @@ const description = "流水不争先，争的是滔滔不绝";
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
-    transition: width 0.2s, height 0.2s, background 0.2s;
+    transition:
+      width 0.2s,
+      height 0.2s,
+      background 0.2s;
     mix-blend-mode: difference;
   }
 
@@ -421,115 +409,7 @@ const description = "流水不争先，争的是滔滔不绝";
     pointer-events: none;
   }
 
-  /* NAVBAR */
-  .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 500;
-    padding: 1rem 2rem;
-    background: rgba(5, 5, 5, 0.65);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border);
-    transition: all var(--transition-normal);
-  }
 
-  .nav-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .logo {
-    font-family: var(--font-display);
-    font-size: 1.75rem;
-    letter-spacing: 0.1em;
-    background: var(--gradient-text);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-decoration: none;
-    font-weight: 600;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-  }
-
-  .nav-link {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    text-decoration: none;
-    letter-spacing: 0.05em;
-    position: relative;
-    transition: color var(--transition-fast);
-  }
-
-  .nav-link:hover,
-  .nav-link.active {
-    color: var(--text-primary);
-  }
-
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: var(--accent-blue);
-    transition: width var(--transition-normal);
-  }
-
-  .nav-link:hover::after,
-  .nav-link.active::after {
-    width: 100%;
-  }
-
-  .nav-status {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--accent-cyan);
-  }
-
-  .status-dot {
-    width: 6px;
-    height: 6px;
-    background: var(--accent-cyan);
-    border-radius: 50%;
-    animation: blink 2s infinite;
-  }
-
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
-
-  .menu-toggle {
-    display: none;
-    flex-direction: column;
-    gap: 4px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 4px;
-  }
-
-  .menu-toggle span {
-    width: 20px;
-    height: 1.5px;
-    background: var(--text-primary);
-    transition: all var(--transition-normal);
-  }
 
   /* HERO */
   #hero {
@@ -576,9 +456,15 @@ const description = "流水不争先，争的是滔滔不绝";
     animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
 
-  .hero-line:nth-child(1) { animation-delay: 0.2s; }
-  .hero-line:nth-child(2) { animation-delay: 0.4s; }
-  .hero-line:nth-child(3) { animation-delay: 0.6s; }
+  .hero-line:nth-child(1) {
+    animation-delay: 0.2s;
+  }
+  .hero-line:nth-child(2) {
+    animation-delay: 0.4s;
+  }
+  .hero-line:nth-child(3) {
+    animation-delay: 0.6s;
+  }
 
   @keyframes fadeInUp {
     from {
@@ -673,11 +559,21 @@ const description = "流水不争先，争的是滔滔不绝";
     animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
 
-  .hero-tags .tag:nth-child(1) { animation-delay: 0.8s; }
-  .hero-tags .tag:nth-child(2) { animation-delay: 0.85s; }
-  .hero-tags .tag:nth-child(3) { animation-delay: 0.9s; }
-  .hero-tags .tag:nth-child(4) { animation-delay: 0.95s; }
-  .hero-tags .tag:nth-child(5) { animation-delay: 1s; }
+  .hero-tags .tag:nth-child(1) {
+    animation-delay: 0.8s;
+  }
+  .hero-tags .tag:nth-child(2) {
+    animation-delay: 0.85s;
+  }
+  .hero-tags .tag:nth-child(3) {
+    animation-delay: 0.9s;
+  }
+  .hero-tags .tag:nth-child(4) {
+    animation-delay: 0.95s;
+  }
+  .hero-tags .tag:nth-child(5) {
+    animation-delay: 1s;
+  }
 
   .scroll-hint {
     position: absolute;
@@ -714,13 +610,24 @@ const description = "流水不争先，争的是滔滔不绝";
   }
 
   @keyframes scrollLine {
-    0% { transform: translateX(-50%) translateY(0); opacity: 1; }
-    100% { transform: translateX(-50%) translateY(-30px); opacity: 0; }
+    0% {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(-50%) translateY(-30px);
+      opacity: 0;
+    }
   }
 
   @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(5px); }
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(5px);
+    }
   }
 
   /* TICKER */
@@ -745,8 +652,12 @@ const description = "流水不争先，争的是滔滔不绝";
   }
 
   @keyframes tickerScroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
   }
 
   .ticker-item {
@@ -966,10 +877,18 @@ const description = "流水不争先，争的是滔滔不绝";
     padding: 2rem;
   }
 
-  .bento-item:nth-child(2) { grid-column: span 5; }
-  .bento-item:nth-child(3) { grid-column: span 3; }
-  .bento-item:nth-child(4) { grid-column: span 4; }
-  .bento-item:nth-child(5) { grid-column: span 5; }
+  .bento-item:nth-child(2) {
+    grid-column: span 5;
+  }
+  .bento-item:nth-child(3) {
+    grid-column: span 3;
+  }
+  .bento-item:nth-child(4) {
+    grid-column: span 4;
+  }
+  .bento-item:nth-child(5) {
+    grid-column: span 5;
+  }
 
   .bento-glow {
     position: absolute;
@@ -1259,7 +1178,9 @@ const description = "流水不争先，争的是滔滔不绝";
   .reveal.visible {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+      opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   /* RESPONSIVE */
@@ -1274,10 +1195,18 @@ const description = "流水不争先，争的是滔滔不绝";
     .bento-large {
       grid-column: span 12;
     }
-    .bento-item:nth-child(2) { grid-column: span 12; }
-    .bento-item:nth-child(3) { grid-column: span 6; }
-    .bento-item:nth-child(4) { grid-column: span 6; }
-    .bento-item:nth-child(5) { grid-column: span 12; }
+    .bento-item:nth-child(2) {
+      grid-column: span 12;
+    }
+    .bento-item:nth-child(3) {
+      grid-column: span 6;
+    }
+    .bento-item:nth-child(4) {
+      grid-column: span 6;
+    }
+    .bento-item:nth-child(5) {
+      grid-column: span 12;
+    }
     .about-content {
       grid-template-columns: 1fr;
       gap: 2rem;
@@ -1288,18 +1217,6 @@ const description = "流水不争先，争的是滔滔不绝";
   }
 
   @media (max-width: 768px) {
-    .navbar {
-      padding: 1rem;
-    }
-    .nav-links {
-      display: none;
-    }
-    .nav-status {
-      display: none;
-    }
-    .menu-toggle {
-      display: flex;
-    }
     #hero {
       padding: 4rem 1rem 2rem;
     }
@@ -1329,10 +1246,71 @@ const description = "流水不争先，争的是滔滔不绝";
 </style>
 
 <script>
+  // ─── THEME TOGGLE ─────────────────────────────────────────────
+  const themes = {
+    dark: {
+      '--bg-primary': '#050505',
+      '--bg-secondary': '#0B0B0D',
+      '--bg-card': 'rgba(255, 255, 255, 0.03)',
+      '--bg-card-hover': 'rgba(255, 255, 255, 0.05)',
+      '--border': 'rgba(255, 255, 255, 0.08)',
+      '--border-hover': 'rgba(255, 255, 255, 0.15)',
+      '--text-primary': '#F5F5F5',
+      '--text-secondary': '#D4D4D8',
+      '--text-muted': '#A1A1AA',
+      '--text-subtle': '#71717A',
+      '--accent-blue': '#60A5FA',
+      '--accent-violet': '#8B5CF6',
+      '--accent-cyan': '#22D3EE',
+      '--gradient': 'linear-gradient(135deg, #60A5FA, #8B5CF6, #22D3EE)',
+      '--gradient-text': 'linear-gradient(135deg, #60A5FA, #8B5CF6)',
+    },
+    light: {
+      '--bg-primary': '#FFFFFF',
+      '--bg-secondary': '#F8F9FA',
+      '--bg-card': 'rgba(0, 0, 0, 0.02)',
+      '--bg-card-hover': 'rgba(0, 0, 0, 0.04)',
+      '--border': 'rgba(0, 0, 0, 0.08)',
+      '--border-hover': 'rgba(0, 0, 0, 0.12)',
+      '--text-primary': '#1A1A1A',
+      '--text-secondary': '#4A5568',
+      '--text-muted': '#718096',
+      '--text-subtle': '#A0AEC0',
+      '--accent-blue': '#3182CE',
+      '--accent-violet': '#805AD5',
+      '--accent-cyan': '#0BC5EA',
+      '--gradient': 'linear-gradient(135deg, #3182CE, #805AD5, #0BC5EA)',
+      '--gradient-text': 'linear-gradient(135deg, #3182CE, #805AD5)',
+    },
+  };
+
+  function setTheme(themeName) {
+    const root = document.documentElement;
+    const colors = themes[themeName] || themes.dark;
+    Object.entries(colors).forEach(([key, value]) => {
+      root.style.setProperty(key, value);
+    });
+    localStorage.setItem('theme', themeName);
+    const icon = document.getElementById('theme-icon');
+    if (icon) icon.textContent = themeName === 'dark' ? '🌙' : '☀️';
+  }
+
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  setTheme(savedTheme);
+
+  const themeToggle = document.getElementById('theme-toggle');
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const current = localStorage.getItem('theme') || 'dark';
+      const newTheme = current === 'dark' ? 'light' : 'dark';
+      setTheme(newTheme);
+    });
+  }
+
   // ─── SHADER BACKGROUND ───────────────────────────────────────────
   const sc = document.getElementById('shader-canvas');
   const sgl = sc.getContext('webgl') || sc.getContext('experimental-webgl');
-  
+
   function resizeShader() {
     sc.width = innerWidth;
     sc.height = innerHeight;
@@ -1387,8 +1365,12 @@ void main(){
     const rl = gl.getUniformLocation(prog, 'r');
     const ml = gl.getUniformLocation(prog, 'm');
 
-    let mx = 0, my = 0;
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    let mx = 0,
+      my = 0;
+    document.addEventListener('mousemove', (e) => {
+      mx = e.clientX;
+      my = e.clientY;
+    });
 
     function animShader(ts) {
       gl.uniform1f(tl, ts * 0.001);
@@ -1420,24 +1402,28 @@ void main(){
     vy: (Math.random() - 0.5) * 0.2,
     r: Math.random() * 1.5 + 0.5,
     c: PARTICLE_COLORS[Math.floor(Math.random() * PARTICLE_COLORS.length)],
-    o: Math.random() * 0.3 + 0.1
+    o: Math.random() * 0.3 + 0.1,
   }));
 
-  let pmx = 0, pmy = 0;
-  document.addEventListener('mousemove', e => { pmx = e.clientX; pmy = e.clientY; });
+  let pmx = 0,
+    pmy = 0;
+  document.addEventListener('mousemove', (e) => {
+    pmx = e.clientX;
+    pmy = e.clientY;
+  });
 
   function animParticles() {
     ctx.clearRect(0, 0, pc.width, pc.height);
-    particles.forEach(p => {
+    particles.forEach((p) => {
       const dx = pmx - p.x;
       const dy = pmy - p.y;
       const d = Math.sqrt(dx * dx + dy * dy);
-      
+
       if (d < 120) {
         p.vx += (dx / d) * 0.03;
         p.vy += (dy / d) * 0.03;
       }
-      
+
       p.vx *= 0.98;
       p.vy *= 0.98;
       p.x += p.vx;
@@ -1461,7 +1447,7 @@ void main(){
         const dx = particles[i].x - particles[j].x;
         const dy = particles[i].y - particles[j].y;
         const d = Math.sqrt(dx * dx + dy * dy);
-        
+
         if (d < 80) {
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
@@ -1481,9 +1467,12 @@ void main(){
   // ─── CURSOR ANIMATION ───────────────────────────────────────────
   const cur = document.getElementById('cursor');
   const fol = document.getElementById('cursor-follower');
-  let fx = 0, fy = 0, cx2 = 0, cy2 = 0;
+  let fx = 0,
+    fy = 0,
+    cx2 = 0,
+    cy2 = 0;
 
-  document.addEventListener('mousemove', e => {
+  document.addEventListener('mousemove', (e) => {
     cx2 = e.clientX;
     cy2 = e.clientY;
     cur.style.left = cx2 + 'px';
@@ -1499,7 +1488,7 @@ void main(){
   }
   animCursor();
 
-  document.querySelectorAll('a, button, .magnetic').forEach(el => {
+  document.querySelectorAll('a, button, .magnetic').forEach((el) => {
     el.addEventListener('mouseenter', () => {
       cur.style.width = '24px';
       cur.style.height = '24px';
@@ -1517,8 +1506,8 @@ void main(){
   });
 
   // ─── MAGNETIC EFFECT ────────────────────────────────────────────
-  document.querySelectorAll('.magnetic').forEach(el => {
-    el.addEventListener('mousemove', e => {
+  document.querySelectorAll('.magnetic').forEach((el) => {
+    el.addEventListener('mousemove', (e) => {
       const rect = el.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
@@ -1530,14 +1519,14 @@ void main(){
   });
 
   // ─── THUMBNAIL CANVASES ─────────────────────────────────────────
-  document.querySelectorAll('.thumb-canvas').forEach(c => {
+  document.querySelectorAll('.thumb-canvas').forEach((c) => {
     const hue = +c.dataset.hue;
     const spd = +c.dataset.speed;
     c.width = c.offsetWidth;
     c.height = c.offsetHeight;
     const cx = c.getContext('2d');
     let t = 0;
-    
+
     function drawThumb() {
       cx.clearRect(0, 0, c.width, c.height);
       for (let i = 0; i < 3; i++) {
@@ -1559,16 +1548,16 @@ void main(){
   });
 
   // ─── LAB CANVASES ───────────────────────────────────────────────
-  document.querySelectorAll('.lab-canvas').forEach(c => {
+  document.querySelectorAll('.lab-canvas').forEach((c) => {
     const type = c.dataset.type;
     c.width = c.offsetWidth;
     c.height = c.offsetHeight;
     const cx = c.getContext('2d');
     let t = 0;
-    
+
     function drawLab() {
       cx.clearRect(0, 0, c.width, c.height);
-      
+
       if (type === 'flow') {
         for (let i = 0; i < 5; i++) {
           const x = (c.width / 6) * (i + 1);
@@ -1587,8 +1576,8 @@ void main(){
         }
       } else if (type === 'particles') {
         for (let i = 0; i < 20; i++) {
-          const x = (Math.sin(t * 0.3 + i * 0.5) + 1) * c.width / 2;
-          const y = (Math.cos(t * 0.4 + i * 0.7) + 1) * c.height / 2;
+          const x = ((Math.sin(t * 0.3 + i * 0.5) + 1) * c.width) / 2;
+          const y = ((Math.cos(t * 0.4 + i * 0.7) + 1) * c.height) / 2;
           const r = 2 + Math.sin(t + i) * 1;
           cx.beginPath();
           cx.arc(x, y, r, 0, Math.PI * 2);
@@ -1608,7 +1597,7 @@ void main(){
           cx.stroke();
         }
       }
-      
+
       t += 0.016;
       requestAnimationFrame(drawLab);
     }
@@ -1616,24 +1605,21 @@ void main(){
   });
 
   // ─── SCROLL REVEAL ──────────────────────────────────────────────
-  const io = new IntersectionObserver(entries => {
-    entries.forEach((entry, index) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, index * 100);
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, index * 100);
+          io.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -50px 0px' },
+  );
 
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 
-  // ─── NAVIGATION ACTIVE STATE ────────────────────────────────────
-  const currentPath = window.location.pathname;
-  document.querySelectorAll('.nav-link').forEach(link => {
-    if (link.getAttribute('href') === currentPath) {
-      link.classList.add('active');
-    }
-  });
+
 </script>

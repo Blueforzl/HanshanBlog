@@ -1,4 +1,6 @@
 ---
+import Navbar from '../components/Navbar.astro';
+
 const title = "Lab - Hanshan";
 const description = "动效实验室，探索 WebGL、动画与交互的边界";
 
@@ -117,92 +119,7 @@ const experiments = [
         transition: transform 0.15s ease-out, border-color 0.2s;
       }
 
-      .navbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 100;
-        background: rgba(5, 5, 5, 0.65);
-        backdrop-filter: blur(16px);
-        border-bottom: 1px solid var(--border-color);
-      }
 
-      .nav-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 1rem 2rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-
-      .logo {
-        font-family: 'Bebas Neue', sans-serif;
-        font-size: 1.75rem;
-        letter-spacing: 0.05em;
-        color: var(--text-primary);
-        text-decoration: none;
-        transition: transform 0.2s ease;
-      }
-
-      .nav-links {
-        display: flex;
-        list-style: none;
-        gap: 2rem;
-      }
-
-      .nav-link {
-        color: var(--text-subtle);
-        text-decoration: none;
-        font-size: 0.875rem;
-        font-weight: 500;
-        position: relative;
-        transition: color var(--transition-fast);
-      }
-
-      .nav-link:hover,
-      .nav-link.active {
-        color: var(--text-primary);
-      }
-
-      .nav-link::after {
-        content: '';
-        position: absolute;
-        bottom: -4px;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background: linear-gradient(90deg, var(--accent-blue), var(--accent-violet));
-        transition: width var(--transition-fast);
-      }
-
-      .nav-link:hover::after,
-      .nav-link.active::after {
-        width: 100%;
-      }
-
-      .nav-status {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 0.75rem;
-        color: var(--text-subtle);
-        font-family: 'JetBrains Mono', monospace;
-      }
-
-      .status-dot {
-        width: 6px;
-        height: 6px;
-        background: #22C55E;
-        border-radius: 50%;
-        animation: pulse 2s infinite;
-      }
-
-      @keyframes pulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.5; }
-      }
 
       #hero {
         min-height: 100vh;
@@ -435,12 +352,6 @@ const experiments = [
       }
 
       @media (max-width: 768px) {
-        .nav-links {
-          display: none;
-        }
-        .nav-status {
-          display: none;
-        }
         .hero-title {
           font-size: clamp(2rem, 10vw, 3.5rem);
         }
@@ -460,22 +371,7 @@ const experiments = [
     <div id="cursor-follower"></div>
     <canvas id="shader-canvas"></canvas>
 
-    <nav class="navbar">
-      <div class="nav-container">
-        <a href="/" class="logo">CL</a>
-        <ul class="nav-links">
-          <li><a href="/" class="nav-link">Home</a></li>
-          <li><a href="/articles" class="nav-link">Blog</a></li>
-          <li><a href="/projects" class="nav-link">Projects</a></li>
-          <li><a href="/lab" class="nav-link active">Lab</a></li>
-          <li><a href="/about" class="nav-link">About</a></li>
-        </ul>
-        <div class="nav-status">
-          <span class="status-dot"></span>
-          <span class="status-text">Available</span>
-        </div>
-      </div>
-    </nav>
+    <Navbar activePage="lab" />
 
     <section id="hero">
       <div class="hero-content">
