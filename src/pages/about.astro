@@ -1,8 +1,8 @@
 ---
 import Navbar from '../components/Navbar.astro';
 
-const title = "About - Hanshan";
-const description = "全栈开发者、AI工程师、技术写作者";
+const title = 'About - Hanshan';
+const description = '全栈开发者、AI工程师、技术写作者';
 
 const skills = [
   { name: 'React / Next.js', level: 95 },
@@ -20,19 +20,19 @@ const experiences = [
     title: 'Senior Full-Stack Engineer',
     company: 'Tech Innovations Inc.',
     period: '2024 - Present',
-    description: '负责核心产品的架构设计与开发，带领团队完成多个大型项目的交付。'
+    description: '负责核心产品的架构设计与开发，带领团队完成多个大型项目的交付。',
   },
   {
     title: 'Frontend Tech Lead',
     company: 'Digital Solutions Ltd.',
     period: '2022 - 2024',
-    description: '主导前端架构升级，推动微前端方案落地，提升团队开发效率。'
+    description: '主导前端架构升级，推动微前端方案落地，提升团队开发效率。',
   },
   {
     title: 'Senior Frontend Engineer',
     company: 'Startup Accelerator',
     period: '2020 - 2022',
-    description: '参与多个创业项目的技术选型与开发，从0到1搭建产品。'
+    description: '参与多个创业项目的技术选型与开发，从0到1搭建产品。',
   },
 ];
 
@@ -40,23 +40,23 @@ const values = [
   {
     icon: '🧠',
     title: '持续学习',
-    description: '保持好奇心，不断探索新技术和方法论'
+    description: '保持好奇心，不断探索新技术和方法论',
   },
   {
     icon: '🎯',
     title: '用户至上',
-    description: '始终以用户体验为核心，打造有价值的产品'
+    description: '始终以用户体验为核心，打造有价值的产品',
   },
   {
     icon: '⚡',
     title: '高效交付',
-    description: '追求卓越的工程实践，确保高质量的代码产出'
+    description: '追求卓越的工程实践，确保高质量的代码产出',
   },
   {
     icon: '🤝',
     title: '团队协作',
-    description: '重视团队沟通，善于分享知识和经验'
-  }
+    description: '重视团队沟通，善于分享知识和经验',
+  },
 ];
 ---
 
@@ -70,10 +70,12 @@ const values = [
     <meta name="description" content={description} />
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-
     <div id="cursor"></div>
     <div id="cursor-follower"></div>
 
@@ -88,9 +90,7 @@ const values = [
           <span class="hero-line">关于</span>
           <span class="hero-line">我</span>
         </h1>
-        <p class="hero-description">
-          全栈开发者 / 创意工程师 / 技术写作者。热爱探索新技术，专注于构建优雅的数字体验。
-        </p>
+        <p class="hero-description">全栈开发者 / 创意工程师 / 技术写作者。热爱探索新技术，专注于构建优雅的数字体验。</p>
       </div>
     </section>
 
@@ -105,11 +105,10 @@ const values = [
             我是一名全栈开发者，拥有多年的软件开发经验。我热爱编程，享受解决复杂问题的过程，并且始终保持对新技术的好奇心。
           </p>
           <p>
-            在前端领域，我精通 React、Next.js、TypeScript，并且对 WebGL、动画和交互设计有深入的研究。后端方面，我擅长 Node.js、NestJS 和各种数据库技术。
+            在前端领域，我精通 React、Next.js、TypeScript，并且对 WebGL、动画和交互设计有深入的研究。后端方面，我擅长
+            Node.js、NestJS 和各种数据库技术。
           </p>
-          <p>
-            除了日常工作，我还喜欢分享技术知识，撰写技术博客，参与开源项目，并探索 AI 与前端的结合应用。
-          </p>
+          <p>除了日常工作，我还喜欢分享技术知识，撰写技术博客，参与开源项目，并探索 AI 与前端的结合应用。</p>
         </div>
       </div>
 
@@ -119,17 +118,19 @@ const values = [
           <h2 class="section-title">技术栈</h2>
         </div>
         <div class="skills-grid">
-          {skills.map((skill, index) => (
-            <div class="skill-item" style={{ animationDelay: `${index * 0.1}s` }}>
-              <div class="skill-header">
-                <span class="skill-name">{skill.name}</span>
-                <span class="skill-percent">{skill.level}%</span>
+          {
+            skills.map((skill, index) => (
+              <div class="skill-item" style={{ animationDelay: `${index * 0.1}s` }}>
+                <div class="skill-header">
+                  <span class="skill-name">{skill.name}</span>
+                  <span class="skill-percent">{skill.level}%</span>
+                </div>
+                <div class="skill-bar-container">
+                  <div class="skill-bar" style={{ width: `${skill.level}%` }} />
+                </div>
               </div>
-              <div class="skill-bar-container">
-                <div class="skill-bar" style={{ width: `${skill.level}%` }}></div>
-              </div>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </div>
 
@@ -139,19 +140,21 @@ const values = [
           <h2 class="section-title">工作经历</h2>
         </div>
         <div class="timeline">
-          {experiences.map((exp, index) => (
-            <div class="timeline-item" style={{ animationDelay: `${index * 0.15}s` }}>
-              <div class="timeline-dot"></div>
-              <div class="timeline-content">
-                <div class="timeline-header">
-                  <h3 class="timeline-title">{exp.title}</h3>
-                  <span class="timeline-period">{exp.period}</span>
+          {
+            experiences.map((exp, index) => (
+              <div class="timeline-item" style={{ animationDelay: `${index * 0.15}s` }}>
+                <div class="timeline-dot" />
+                <div class="timeline-content">
+                  <div class="timeline-header">
+                    <h3 class="timeline-title">{exp.title}</h3>
+                    <span class="timeline-period">{exp.period}</span>
+                  </div>
+                  <span class="timeline-company">{exp.company}</span>
+                  <p class="timeline-description">{exp.description}</p>
                 </div>
-                <span class="timeline-company">{exp.company}</span>
-                <p class="timeline-description">{exp.description}</p>
               </div>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </div>
 
@@ -161,13 +164,15 @@ const values = [
           <h2 class="section-title">核心价值观</h2>
         </div>
         <div class="values-grid">
-          {values.map((value, index) => (
-            <div class="value-card" style={{ animationDelay: `${index * 0.1}s` }}>
-              <span class="value-icon">{value.icon}</span>
-              <h3 class="value-title">{value.title}</h3>
-              <p class="value-description">{value.description}</p>
-            </div>
-          ))}
+          {
+            values.map((value, index) => (
+              <div class="value-card" style={{ animationDelay: `${index * 0.1}s` }}>
+                <span class="value-icon">{value.icon}</span>
+                <h3 class="value-title">{value.title}</h3>
+                <p class="value-description">{value.description}</p>
+              </div>
+            ))
+          }
         </div>
       </div>
     </section>
@@ -183,12 +188,13 @@ const values = [
         </div>
       </div>
     </footer>
-
   </body>
 </html>
 
 <style>
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -196,30 +202,30 @@ const values = [
 
   :root {
     --bg-primary: #050505;
-    --bg-secondary: #0B0B0D;
+    --bg-secondary: #0b0b0d;
     --bg-card: rgba(255, 255, 255, 0.03);
     --border: rgba(255, 255, 255, 0.08);
     --border-hover: rgba(255, 255, 255, 0.15);
-    
-    --text-primary: #F5F5F5;
-    --text-secondary: #D4D4D8;
-    --text-muted: #A1A1AA;
-    --text-subtle: #71717A;
-    
-    --accent-blue: #60A5FA;
-    --accent-violet: #8B5CF6;
-    --accent-cyan: #22D3EE;
-    --gradient: linear-gradient(135deg, #60A5FA, #8B5CF6, #22D3EE);
-    --gradient-text: linear-gradient(135deg, #60A5FA, #8B5CF6);
-    
+
+    --text-primary: #f5f5f5;
+    --text-secondary: #d4d4d8;
+    --text-muted: #a1a1aa;
+    --text-subtle: #71717a;
+
+    --accent-blue: #60a5fa;
+    --accent-violet: #8b5cf6;
+    --accent-cyan: #22d3ee;
+    --gradient: linear-gradient(135deg, #60a5fa, #8b5cf6, #22d3ee);
+    --gradient-text: linear-gradient(135deg, #60a5fa, #8b5cf6);
+
     --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
     --font-mono: 'JetBrains Mono', 'Space Mono', monospace;
     --font-display: 'Bebas Neue', sans-serif;
-    
+
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 16px;
-    
+
     --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -249,7 +255,10 @@ const values = [
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
-    transition: width 0.2s, height 0.2s, background 0.2s;
+    transition:
+      width 0.2s,
+      height 0.2s,
+      background 0.2s;
     mix-blend-mode: difference;
   }
 
@@ -283,8 +292,6 @@ const values = [
     z-index: 0;
     opacity: 0.2;
   }
-
-
 
   /* HERO */
   #hero {
@@ -326,9 +333,11 @@ const values = [
     animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
 
-  .hero-line:nth-child(1) { animation-delay: 0.1s; }
-  .hero-line:nth-child(2) { 
-    animation-delay: 0.3s; 
+  .hero-line:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .hero-line:nth-child(2) {
+    animation-delay: 0.3s;
     background: var(--gradient-text);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -423,7 +432,9 @@ const values = [
   .skill-item.visible {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 0.5s, transform 0.5s;
+    transition:
+      opacity 0.5s,
+      transform 0.5s;
   }
 
   .skill-header {
@@ -485,7 +496,9 @@ const values = [
   .timeline-item.visible {
     opacity: 1;
     transform: translateX(0);
-    transition: opacity 0.5s, transform 0.5s;
+    transition:
+      opacity 0.5s,
+      transform 0.5s;
   }
 
   .timeline-item:last-child {
@@ -640,7 +653,9 @@ const values = [
   .reveal.visible {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+      opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   @media (max-width: 768px) {
@@ -669,7 +684,7 @@ const values = [
   // ─── SHADER BACKGROUND ───────────────────────────────────────────
   const sc = document.getElementById('shader-canvas');
   const sgl = sc.getContext('webgl') || sc.getContext('experimental-webgl');
-  
+
   function resizeShader() {
     sc.width = innerWidth;
     sc.height = innerHeight;
@@ -724,8 +739,12 @@ void main(){
     const rl = gl.getUniformLocation(prog, 'r');
     const ml = gl.getUniformLocation(prog, 'm');
 
-    let mx = 0, my = 0;
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    let mx = 0,
+      my = 0;
+    document.addEventListener('mousemove', (e) => {
+      mx = e.clientX;
+      my = e.clientY;
+    });
 
     function animShader(ts) {
       gl.uniform1f(tl, ts * 0.001);
@@ -740,9 +759,12 @@ void main(){
   // ─── CURSOR ANIMATION ───────────────────────────────────────────
   const cur = document.getElementById('cursor');
   const fol = document.getElementById('cursor-follower');
-  let fx = 0, fy = 0, cx2 = 0, cy2 = 0;
+  let fx = 0,
+    fy = 0,
+    cx2 = 0,
+    cy2 = 0;
 
-  document.addEventListener('mousemove', e => {
+  document.addEventListener('mousemove', (e) => {
     cx2 = e.clientX;
     cy2 = e.clientY;
     cur.style.left = cx2 + 'px';
@@ -758,7 +780,7 @@ void main(){
   }
   animCursor();
 
-  document.querySelectorAll('a, .magnetic').forEach(el => {
+  document.querySelectorAll('a, .magnetic').forEach((el) => {
     el.addEventListener('mouseenter', () => {
       cur.style.width = '24px';
       cur.style.height = '24px';
@@ -776,52 +798,56 @@ void main(){
   });
 
   // ─── SKILL BAR ANIMATION ───────────────────────────────────────────
-  const io = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => {
-          e.target.style.transition = 'opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
-          e.target.style.opacity = '1';
-          e.target.style.transform = 'translateY(0)';
-        }, i * 60);
-        
-        // Animate skill bars
-        if (e.target.classList.contains('skills-section')) {
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
           setTimeout(() => {
-            document.querySelectorAll('.skill-bar').forEach((bar, idx) => {
-              setTimeout(() => {
-                bar.style.width = bar.style.width;
-              }, idx * 100);
-            });
-          }, 300);
-        }
-        
-        // Animate timeline items
-        if (e.target.classList.contains('experience-section')) {
-          setTimeout(() => {
-            document.querySelectorAll('.timeline-item').forEach((item, idx) => {
-              setTimeout(() => {
-                item.classList.add('visible');
-              }, idx * 150);
-            });
-          }, 200);
-        }
-        
-        // Animate value cards
-        if (e.target.classList.contains('values-section')) {
-          setTimeout(() => {
-            document.querySelectorAll('.value-card').forEach((card, idx) => {
-              setTimeout(() => {
-                card.classList.add('visible');
-              }, idx * 100);
-            });
-          }, 200);
-        }
-        
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+            e.target.style.transition =
+              'opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
+            e.target.style.opacity = '1';
+            e.target.style.transform = 'translateY(0)';
+          }, i * 60);
 
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+          // Animate skill bars
+          if (e.target.classList.contains('skills-section')) {
+            setTimeout(() => {
+              document.querySelectorAll('.skill-bar').forEach((bar, idx) => {
+                setTimeout(() => {
+                  bar.style.width = bar.style.width;
+                }, idx * 100);
+              });
+            }, 300);
+          }
+
+          // Animate timeline items
+          if (e.target.classList.contains('experience-section')) {
+            setTimeout(() => {
+              document.querySelectorAll('.timeline-item').forEach((item, idx) => {
+                setTimeout(() => {
+                  item.classList.add('visible');
+                }, idx * 150);
+              });
+            }, 200);
+          }
+
+          // Animate value cards
+          if (e.target.classList.contains('values-section')) {
+            setTimeout(() => {
+              document.querySelectorAll('.value-card').forEach((card, idx) => {
+                setTimeout(() => {
+                  card.classList.add('visible');
+                }, idx * 100);
+              });
+            }, 200);
+          }
+
+          io.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -50px 0px' },
+  );
+
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 </script>

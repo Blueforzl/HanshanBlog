@@ -42,7 +42,7 @@ export function getStaticPaths() {
 - AI 代码审查覆盖率提升 60%
 - 代码审查周期缩短 40%
 - 线上 Bug 率下降 35%
-      `
+      `,
     },
     'ai-memory': {
       title: 'ai-memory：把 Cursor 对话变成结构化知识库',
@@ -90,7 +90,7 @@ const memory = new AIMemory({
 
 await memory.extract('./project');
 \`\`\`
-      `
+      `,
     },
     'ai-gateway-lite-deep': {
       title: '47KB 的 AI 网关是怎么设计的——架构全拆解',
@@ -131,7 +131,7 @@ await memory.extract('./project');
 - 零依赖设计，减少打包体积
 - 懒加载策略，按需加载模块
 - 高效的内存管理，避免内存泄漏
-      `
+      `,
     },
     'ai-future': {
       title: '2027 展望：前端工程师在 AI 时代的终局',
@@ -179,7 +179,7 @@ await memory.extract('./project');
 2. 找到自己的差异化优势
 3. 保持好奇心，持续探索新技术
 4. 建立个人品牌，展示专业能力
-      `
+      `,
     },
     'ai-gateway-lite': {
       title: 'ai-gateway-lite：轻量 AI 网关，多模型路由 + 降级 + 预算控制',
@@ -233,7 +233,7 @@ const response = await gateway.chat({
 - Google Gemini
 - Mistral
 - Together AI
-      `
+      `,
     },
     'on-device-ai': {
       title: '端侧 AI：浏览器里直接跑模型，不调 API',
@@ -290,13 +290,13 @@ const output = await session.run({ input });
 | 纯云端 | 高 | 高 | 低 |
 | 纯端侧 | 低 | 低 | 高 |
 | 混合架构 | 中 | 中 | 中 |
-      `
-    }
+      `,
+    },
   };
 
   return Object.keys(articles).map((articleSlug) => ({
     params: { slug: articleSlug },
-    props: { article: articles[articleSlug] }
+    props: { article: articles[articleSlug] },
   }));
 }
 
@@ -314,10 +314,12 @@ const { title, date, tags, content } = article;
     <meta name="description" content={title} />
     <title>{title} - Conor Liu</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-
     <div id="cursor"></div>
     <div id="cursor-follower"></div>
 
@@ -329,9 +331,7 @@ const { title, date, tags, content } = article;
       <header class="article-header reveal">
         <a href="/articles" class="back-link">← 返回文章列表</a>
         <div class="article-tags">
-          {tags.map((tag) => (
-            <span class="tag">{tag}</span>
-          ))}
+          {tags.map((tag) => <span class="tag">{tag}</span>)}
         </div>
         <h1 class="article-title">{title}</h1>
         <div class="article-meta">
@@ -361,12 +361,13 @@ const { title, date, tags, content } = article;
         </div>
       </div>
     </footer>
-
   </body>
 </html>
 
 <style>
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -374,30 +375,30 @@ const { title, date, tags, content } = article;
 
   :root {
     --bg-primary: #050505;
-    --bg-secondary: #0B0B0D;
+    --bg-secondary: #0b0b0d;
     --bg-card: rgba(255, 255, 255, 0.03);
     --border: rgba(255, 255, 255, 0.08);
     --border-hover: rgba(255, 255, 255, 0.15);
-    
-    --text-primary: #F5F5F5;
-    --text-secondary: #D4D4D8;
-    --text-muted: #A1A1AA;
-    --text-subtle: #71717A;
-    
-    --accent-blue: #60A5FA;
-    --accent-violet: #8B5CF6;
-    --accent-cyan: #22D3EE;
-    --gradient: linear-gradient(135deg, #60A5FA, #8B5CF6, #22D3EE);
-    --gradient-text: linear-gradient(135deg, #60A5FA, #8B5CF6);
-    
+
+    --text-primary: #f5f5f5;
+    --text-secondary: #d4d4d8;
+    --text-muted: #a1a1aa;
+    --text-subtle: #71717a;
+
+    --accent-blue: #60a5fa;
+    --accent-violet: #8b5cf6;
+    --accent-cyan: #22d3ee;
+    --gradient: linear-gradient(135deg, #60a5fa, #8b5cf6, #22d3ee);
+    --gradient-text: linear-gradient(135deg, #60a5fa, #8b5cf6);
+
     --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
     --font-mono: 'JetBrains Mono', 'Space Mono', monospace;
     --font-display: 'Bebas Neue', sans-serif;
-    
+
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 16px;
-    
+
     --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -427,7 +428,10 @@ const { title, date, tags, content } = article;
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
-    transition: width 0.2s, height 0.2s, background 0.2s;
+    transition:
+      width 0.2s,
+      height 0.2s,
+      background 0.2s;
     mix-blend-mode: difference;
   }
 
@@ -461,8 +465,6 @@ const { title, date, tags, content } = article;
     z-index: 0;
     opacity: 0.25;
   }
-
-
 
   /* ARTICLE CONTAINER */
   .article-container {
@@ -735,7 +737,9 @@ const { title, date, tags, content } = article;
   .reveal.visible {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+      opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   @media (max-width: 768px) {
@@ -760,7 +764,7 @@ const { title, date, tags, content } = article;
   // ─── SHADER BACKGROUND ───────────────────────────────────────────
   const sc = document.getElementById('shader-canvas');
   const sgl = sc.getContext('webgl') || sc.getContext('experimental-webgl');
-  
+
   function resizeShader() {
     sc.width = innerWidth;
     sc.height = innerHeight;
@@ -815,8 +819,12 @@ void main(){
     const rl = gl.getUniformLocation(prog, 'r');
     const ml = gl.getUniformLocation(prog, 'm');
 
-    let mx = 0, my = 0;
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    let mx = 0,
+      my = 0;
+    document.addEventListener('mousemove', (e) => {
+      mx = e.clientX;
+      my = e.clientY;
+    });
 
     function animShader(ts) {
       gl.uniform1f(tl, ts * 0.001);
@@ -831,9 +839,12 @@ void main(){
   // ─── CURSOR ANIMATION ───────────────────────────────────────────
   const cur = document.getElementById('cursor');
   const fol = document.getElementById('cursor-follower');
-  let fx = 0, fy = 0, cx2 = 0, cy2 = 0;
+  let fx = 0,
+    fy = 0,
+    cx2 = 0,
+    cy2 = 0;
 
-  document.addEventListener('mousemove', e => {
+  document.addEventListener('mousemove', (e) => {
     cx2 = e.clientX;
     cy2 = e.clientY;
     cur.style.left = cx2 + 'px';
@@ -849,7 +860,7 @@ void main(){
   }
   animCursor();
 
-  document.querySelectorAll('a, .magnetic').forEach(el => {
+  document.querySelectorAll('a, .magnetic').forEach((el) => {
     el.addEventListener('mouseenter', () => {
       cur.style.width = '24px';
       cur.style.height = '24px';
@@ -867,18 +878,22 @@ void main(){
   });
 
   // ─── SCROLL REVEAL ───────────────────────────────────────────
-  const io = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => {
-          e.target.style.transition = 'opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
-          e.target.style.opacity = '1';
-          e.target.style.transform = 'translateY(0)';
-        }, i * 60);
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => {
+            e.target.style.transition =
+              'opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
+            e.target.style.opacity = '1';
+            e.target.style.transform = 'translateY(0)';
+          }, i * 60);
+          io.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -30px 0px' },
+  );
 
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 </script>

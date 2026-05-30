@@ -16,15 +16,15 @@ export function getStaticPaths() {
         '多模型路由：支持多个 AI 模型提供商，智能路由请求',
         '自动降级：在服务不可用时自动切换到备用服务',
         '限流控制：防止 API 调用过载，保护服务稳定性',
-        '成本控制：精确控制 API 调用成本，避免意外超支'
+        '成本控制：精确控制 API 调用成本，避免意外超支',
       ],
       stats: {
         downloads: '50K+',
         stars: '1.2K',
         watchers: '86',
-        forks: '124'
+        forks: '124',
       },
-      githubUrl: 'https://github.com/conorliu/ai-gateway-lite'
+      githubUrl: 'https://github.com/conorliu/ai-gateway-lite',
     },
     'ai-memory': {
       title: 'ai-memory',
@@ -36,15 +36,15 @@ export function getStaticPaths() {
         '自动提取：无需手动标记，自动提取关键信息',
         '结构化输出：支持 Markdown、JSON、YAML 等格式',
         'Git 可追踪：所有变更通过 Git 管理',
-        '多编辑器支持：兼容 Cursor、VS Code Copilot 等'
+        '多编辑器支持：兼容 Cursor、VS Code Copilot 等',
       ],
       stats: {
         downloads: '25K+',
         stars: '890',
         watchers: '52',
-        forks: '78'
+        forks: '78',
       },
-      githubUrl: 'https://github.com/conorliu/ai-memory'
+      githubUrl: 'https://github.com/conorliu/ai-memory',
     },
     'shader-playground': {
       title: 'Shader Playground',
@@ -56,15 +56,15 @@ export function getStaticPaths() {
         '实时预览：WebGL 实时渲染',
         '语法高亮：GLSL 代码支持',
         '效果分享：一键分享你的 Shader',
-        '预设模板：丰富的示例和模板'
+        '预设模板：丰富的示例和模板',
       ],
       stats: {
         visits: '100K+',
         stars: '650',
         watchers: '41',
-        forks: '92'
+        forks: '92',
       },
-      githubUrl: 'https://github.com/conorliu/shader-playground'
+      githubUrl: 'https://github.com/conorliu/shader-playground',
     },
     'particle-system': {
       title: 'Particle System',
@@ -76,15 +76,15 @@ export function getStaticPaths() {
         'GPU 加速：利用 WebGL 并行计算能力',
         '百万级粒子：流畅渲染大规模粒子',
         '物理模拟：支持重力、碰撞、风力等',
-        '模块化设计：易于扩展和定制'
+        '模块化设计：易于扩展和定制',
       ],
       stats: {
         downloads: '15K+',
         stars: '420',
         watchers: '28',
-        forks: '56'
+        forks: '56',
       },
-      githubUrl: 'https://github.com/conorliu/particle-system'
+      githubUrl: 'https://github.com/conorliu/particle-system',
     },
     'realtime-charts': {
       title: 'Realtime Charts',
@@ -96,15 +96,15 @@ export function getStaticPaths() {
         '实时更新：毫秒级数据刷新',
         '多种图表：折线图、柱状图、饼图等',
         '交互丰富：缩放、平移、悬停提示',
-        '响应式设计：适配各种屏幕尺寸'
+        '响应式设计：适配各种屏幕尺寸',
       ],
       stats: {
         downloads: '35K+',
         stars: '780',
         watchers: '39',
-        forks: '87'
+        forks: '87',
       },
-      githubUrl: 'https://github.com/conorliu/realtime-charts'
+      githubUrl: 'https://github.com/conorliu/realtime-charts',
     },
     'micro-frontends': {
       title: 'Micro Frontends',
@@ -116,21 +116,21 @@ export function getStaticPaths() {
         'Module Federation：运行时模块共享',
         'Monorepo 架构：统一管理多个应用',
         '组件库：可复用的 UI 组件',
-        '最佳实践：完整的架构文档'
+        '最佳实践：完整的架构文档',
       ],
       stats: {
         downloads: '45K+',
         stars: '920',
         watchers: '67',
-        forks: '112'
+        forks: '112',
       },
-      githubUrl: 'https://github.com/conorliu/micro-frontends'
-    }
+      githubUrl: 'https://github.com/conorliu/micro-frontends',
+    },
   };
 
   return Object.keys(projects).map((projectSlug) => ({
     params: { slug: projectSlug },
-    props: { project: projects[projectSlug] }
+    props: { project: projects[projectSlug] },
   }));
 }
 
@@ -148,10 +148,12 @@ const { title, subtitle, tags, techStack, description, features, stats, githubUr
     <meta name="description" content={subtitle} />
     <title>{title} - Conor Liu</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-
     <div id="cursor"></div>
     <div id="cursor-follower"></div>
 
@@ -163,9 +165,7 @@ const { title, subtitle, tags, techStack, description, features, stats, githubUr
       <header class="project-header reveal">
         <a href="/projects" class="back-link">← 返回项目列表</a>
         <div class="project-tags">
-          {tags.map((tag) => (
-            <span class="tag">{tag}</span>
-          ))}
+          {tags.map((tag) => <span class="tag">{tag}</span>)}
         </div>
         <h1 class="project-title">{title}</h1>
         <p class="project-subtitle">{subtitle}</p>
@@ -207,9 +207,11 @@ const { title, subtitle, tags, techStack, description, features, stats, githubUr
               </div>
               <a href={githubUrl} target="_blank" class="github-btn">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M15 22v-4a4.86 4.86 0 0 0-1-3.75 4.38 4.38 0 0 0-.11-1.34L15 3.79a2.43 2.43 0 0 0-2.5-2.26 2.47 2.47 0 0 0-1.86.81L7 8.73a4.38 4.38 0 0 0-.11 1.34A4.86 4.86 0 0 0 6 18v4"/>
-                  <path d="M9 18.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-                  <path d="M15 18.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                  <path
+                    d="M15 22v-4a4.86 4.86 0 0 0-1-3.75 4.38 4.38 0 0 0-.11-1.34L15 3.79a2.43 2.43 0 0 0-2.5-2.26 2.47 2.47 0 0 0-1.86.81L7 8.73a4.38 4.38 0 0 0-.11 1.34A4.86 4.86 0 0 0 6 18v4"
+                  ></path>
+                  <path d="M9 18.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"></path>
+                  <path d="M15 18.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"></path>
                 </svg>
                 <span>View on GitHub</span>
               </a>
@@ -221,9 +223,7 @@ const { title, subtitle, tags, techStack, description, features, stats, githubUr
           <div class="tech-stack">
             <h2 class="section-title">技术栈</h2>
             <div class="tech-tags">
-              {techStack.map((tech) => (
-                <span class="tech-tag">{tech}</span>
-              ))}
+              {techStack.map((tech) => <span class="tech-tag">{tech}</span>)}
             </div>
           </div>
         </div>
@@ -232,12 +232,14 @@ const { title, subtitle, tags, techStack, description, features, stats, githubUr
           <div class="features-section">
             <h2 class="section-title">核心功能</h2>
             <div class="features-list">
-              {features.map((feature, index) => (
-                <div class="feature-item">
-                  <span class="feature-number">{String(index + 1).padStart(2, '0')}</span>
-                  <p class="feature-text">{feature}</p>
-                </div>
-              ))}
+              {
+                features.map((feature, index) => (
+                  <div class="feature-item">
+                    <span class="feature-number">{String(index + 1).padStart(2, '0')}</span>
+                    <p class="feature-text">{feature}</p>
+                  </div>
+                ))
+              }
             </div>
           </div>
         </div>
@@ -261,12 +263,13 @@ const { title, subtitle, tags, techStack, description, features, stats, githubUr
         </div>
       </div>
     </footer>
-
   </body>
 </html>
 
 <style>
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -274,30 +277,30 @@ const { title, subtitle, tags, techStack, description, features, stats, githubUr
 
   :root {
     --bg-primary: #050505;
-    --bg-secondary: #0B0B0D;
+    --bg-secondary: #0b0b0d;
     --bg-card: rgba(255, 255, 255, 0.03);
     --border: rgba(255, 255, 255, 0.08);
     --border-hover: rgba(255, 255, 255, 0.15);
-    
-    --text-primary: #F5F5F5;
-    --text-secondary: #D4D4D8;
-    --text-muted: #A1A1AA;
-    --text-subtle: #71717A;
-    
-    --accent-blue: #60A5FA;
-    --accent-violet: #8B5CF6;
-    --accent-cyan: #22D3EE;
-    --gradient: linear-gradient(135deg, #60A5FA, #8B5CF6, #22D3EE);
-    --gradient-text: linear-gradient(135deg, #60A5FA, #8B5CF6);
-    
+
+    --text-primary: #f5f5f5;
+    --text-secondary: #d4d4d8;
+    --text-muted: #a1a1aa;
+    --text-subtle: #71717a;
+
+    --accent-blue: #60a5fa;
+    --accent-violet: #8b5cf6;
+    --accent-cyan: #22d3ee;
+    --gradient: linear-gradient(135deg, #60a5fa, #8b5cf6, #22d3ee);
+    --gradient-text: linear-gradient(135deg, #60a5fa, #8b5cf6);
+
     --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
     --font-mono: 'JetBrains Mono', 'Space Mono', monospace;
     --font-display: 'Bebas Neue', sans-serif;
-    
+
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 16px;
-    
+
     --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -327,7 +330,10 @@ const { title, subtitle, tags, techStack, description, features, stats, githubUr
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
-    transition: width 0.2s, height 0.2s, background 0.2s;
+    transition:
+      width 0.2s,
+      height 0.2s,
+      background 0.2s;
     mix-blend-mode: difference;
   }
 
@@ -361,8 +367,6 @@ const { title, subtitle, tags, techStack, description, features, stats, githubUr
     z-index: 0;
     opacity: 0.2;
   }
-
-
 
   /* PROJECT CONTAINER */
   .project-container {
@@ -717,7 +721,9 @@ const { title, subtitle, tags, techStack, description, features, stats, githubUr
   .reveal.visible {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+      opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   @media (max-width: 1024px) {
@@ -764,7 +770,7 @@ const { title, subtitle, tags, techStack, description, features, stats, githubUr
   // ─── SHADER BACKGROUND ───────────────────────────────────────────
   const sc = document.getElementById('shader-canvas');
   const sgl = sc.getContext('webgl') || sc.getContext('experimental-webgl');
-  
+
   function resizeShader() {
     sc.width = innerWidth;
     sc.height = innerHeight;
@@ -819,8 +825,12 @@ void main(){
     const rl = gl.getUniformLocation(prog, 'r');
     const ml = gl.getUniformLocation(prog, 'm');
 
-    let mx = 0, my = 0;
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    let mx = 0,
+      my = 0;
+    document.addEventListener('mousemove', (e) => {
+      mx = e.clientX;
+      my = e.clientY;
+    });
 
     function animShader(ts) {
       gl.uniform1f(tl, ts * 0.001);
@@ -835,7 +845,7 @@ void main(){
   // ─── HERO CANVAS ───────────────────────────────────────────
   const heroCanvas = document.getElementById('hero-canvas');
   const heroGl = heroCanvas.getContext('webgl') || heroCanvas.getContext('experimental-webgl');
-  
+
   function resizeHero() {
     heroCanvas.width = heroCanvas.offsetWidth;
     heroCanvas.height = heroCanvas.offsetHeight;
@@ -907,9 +917,12 @@ void main(){
   // ─── CURSOR ANIMATION ───────────────────────────────────────────
   const cur = document.getElementById('cursor');
   const fol = document.getElementById('cursor-follower');
-  let fx = 0, fy = 0, cx2 = 0, cy2 = 0;
+  let fx = 0,
+    fy = 0,
+    cx2 = 0,
+    cy2 = 0;
 
-  document.addEventListener('mousemove', e => {
+  document.addEventListener('mousemove', (e) => {
     cx2 = e.clientX;
     cy2 = e.clientY;
     cur.style.left = cx2 + 'px';
@@ -925,7 +938,7 @@ void main(){
   }
   animCursor();
 
-  document.querySelectorAll('a, .magnetic').forEach(el => {
+  document.querySelectorAll('a, .magnetic').forEach((el) => {
     el.addEventListener('mouseenter', () => {
       cur.style.width = '24px';
       cur.style.height = '24px';
@@ -943,18 +956,22 @@ void main(){
   });
 
   // ─── SCROLL REVEAL ───────────────────────────────────────────
-  const io = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => {
-          e.target.style.transition = 'opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
-          e.target.style.opacity = '1';
-          e.target.style.transform = 'translateY(0)';
-        }, i * 80);
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => {
+            e.target.style.transition =
+              'opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
+            e.target.style.opacity = '1';
+            e.target.style.transform = 'translateY(0)';
+          }, i * 80);
+          io.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -30px 0px' },
+  );
 
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 </script>

@@ -1,18 +1,19 @@
 ---
 import Navbar from '../components/Navbar.astro';
 
-const title = "文章 - Hanshan";
-const description = "技术文章，涵盖前端工程化、AI全栈、架构升级等主题";
+const title = '文章 - Hanshan';
+const description = '技术文章，涵盖前端工程化、AI全栈、架构升级等主题';
 
 const articles = [
   {
     slug: 'ai-dev-standards',
     title: 'AI 开发规范：让 AI 在真实项目里稳定工作的工程体系',
-    excerpt: '基于两个真实项目，拆解五层约束体系：AGENTS.md 入职文件、文档基建、Cursor Rules、Feature Gate、Spike-First',
+    excerpt:
+      '基于两个真实项目，拆解五层约束体系：AGENTS.md 入职文件、文档基建、Cursor Rules、Feature Gate、Spike-First',
     date: '2026-04-28',
     tags: ['AI 开发', '工程规范'],
     hue: 220,
-    speed: 1.2
+    speed: 1.2,
   },
   {
     slug: 'ai-memory',
@@ -21,7 +22,7 @@ const articles = [
     date: '2026-04-28',
     tags: ['开源', 'AI Memory'],
     hue: 260,
-    speed: 0.8
+    speed: 0.8,
   },
   {
     slug: 'ai-gateway-lite-deep',
@@ -30,7 +31,7 @@ const articles = [
     date: '2026-04-02',
     tags: ['架构', 'AI Gateway'],
     hue: 180,
-    speed: 1.5
+    speed: 1.5,
   },
   {
     slug: 'ai-future',
@@ -39,7 +40,7 @@ const articles = [
     date: '2026-03-28',
     tags: ['未来展望', '职业规划'],
     hue: 300,
-    speed: 1.0
+    speed: 1.0,
   },
   {
     slug: 'ai-gateway-lite',
@@ -48,7 +49,7 @@ const articles = [
     date: '2026-03-25',
     tags: ['TypeScript', 'AI Gateway'],
     hue: 200,
-    speed: 1.1
+    speed: 1.1,
   },
   {
     slug: 'on-device-ai',
@@ -57,8 +58,8 @@ const articles = [
     date: '2026-03-18',
     tags: ['端侧 AI', 'WebGPU'],
     hue: 160,
-    speed: 0.9
-  }
+    speed: 0.9,
+  },
 ];
 ---
 
@@ -72,10 +73,12 @@ const articles = [
     <meta name="description" content={description} />
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-
     <div id="cursor"></div>
     <div id="cursor-follower"></div>
 
@@ -91,9 +94,7 @@ const articles = [
           <span class="hero-line">技术</span>
           <span class="hero-line">文章</span>
         </h1>
-        <p class="hero-description">
-          探索前端工程化、人工智能集成与全栈架构的平衡之美。记录每一次技术栈的迭代与思考。
-        </p>
+        <p class="hero-description">探索前端工程化、人工智能集成与全栈架构的平衡之美。记录每一次技术栈的迭代与思考。</p>
       </div>
     </section>
 
@@ -104,26 +105,32 @@ const articles = [
       </div>
 
       <div class="articles-grid">
-        {articles.map((article, index) => (
-          <a href={`/article/${article.slug}`} class="article-card reveal" style={{ animationDelay: `${index * 0.1}s` }}>
-            <div class="article-thumbnail">
-              <canvas class="thumb-canvas" data-hue={article.hue} data-speed={article.speed}></canvas>
-            </div>
-            <div class="article-content">
-              <div class="article-tags">
-                {article.tags.map((tag) => (
-                  <span class="tag">{tag}</span>
-                ))}
+        {
+          articles.map((article, index) => (
+            <a
+              href={`/article/${article.slug}`}
+              class="article-card reveal"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <div class="article-thumbnail">
+                <canvas class="thumb-canvas" data-hue={article.hue} data-speed={article.speed} />
               </div>
-              <h3 class="article-title">{article.title}</h3>
-              <p class="article-excerpt">{article.excerpt}</p>
-              <div class="article-meta">
-                <span class="article-date">{article.date}</span>
-                <span class="article-read">Read →</span>
+              <div class="article-content">
+                <div class="article-tags">
+                  {article.tags.map((tag) => (
+                    <span class="tag">{tag}</span>
+                  ))}
+                </div>
+                <h3 class="article-title">{article.title}</h3>
+                <p class="article-excerpt">{article.excerpt}</p>
+                <div class="article-meta">
+                  <span class="article-date">{article.date}</span>
+                  <span class="article-read">Read →</span>
+                </div>
               </div>
-            </div>
-          </a>
-        ))}
+            </a>
+          ))
+        }
       </div>
     </section>
 
@@ -138,12 +145,13 @@ const articles = [
         </div>
       </div>
     </footer>
-
   </body>
 </html>
 
 <style>
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -151,34 +159,34 @@ const articles = [
 
   :root {
     --bg-primary: #050505;
-    --bg-secondary: #0B0B0D;
+    --bg-secondary: #0b0b0d;
     --bg-card: rgba(255, 255, 255, 0.03);
     --bg-card-hover: rgba(255, 255, 255, 0.05);
     --border: rgba(255, 255, 255, 0.08);
     --border-hover: rgba(255, 255, 255, 0.15);
-    
-    --text-primary: #F5F5F5;
-    --text-secondary: #D4D4D8;
-    --text-muted: #A1A1AA;
-    --text-subtle: #71717A;
-    
-    --accent-blue: #60A5FA;
-    --accent-violet: #8B5CF6;
-    --accent-cyan: #22D3EE;
-    --gradient: linear-gradient(135deg, #60A5FA, #8B5CF6, #22D3EE);
-    --gradient-text: linear-gradient(135deg, #60A5FA, #8B5CF6);
-    
+
+    --text-primary: #f5f5f5;
+    --text-secondary: #d4d4d8;
+    --text-muted: #a1a1aa;
+    --text-subtle: #71717a;
+
+    --accent-blue: #60a5fa;
+    --accent-violet: #8b5cf6;
+    --accent-cyan: #22d3ee;
+    --gradient: linear-gradient(135deg, #60a5fa, #8b5cf6, #22d3ee);
+    --gradient-text: linear-gradient(135deg, #60a5fa, #8b5cf6);
+
     --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
     --font-mono: 'JetBrains Mono', 'Space Mono', monospace;
     --font-display: 'Bebas Neue', sans-serif;
-    
+
     --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
     --shadow-hover: 0 8px 32px rgba(96, 165, 250, 0.15);
-    
+
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 16px;
-    
+
     --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -208,7 +216,10 @@ const articles = [
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
-    transition: width 0.2s, height 0.2s, background 0.2s;
+    transition:
+      width 0.2s,
+      height 0.2s,
+      background 0.2s;
     mix-blend-mode: difference;
   }
 
@@ -250,54 +261,82 @@ const articles = [
     pointer-events: none;
   }
 
-
-
   /* HERO */
   #hero {
-    min-height: 60vh;
+    min-height: 80vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     padding: 6rem 2rem 4rem;
     position: relative;
     z-index: 10;
+    text-align: center;
   }
 
   .hero-content {
     max-width: 900px;
+    margin: 0 auto;
   }
 
   .hero-badge {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     color: var(--accent-cyan);
     letter-spacing: 0.2em;
     text-transform: uppercase;
     margin-bottom: 1.5rem;
     display: inline-block;
-    padding: 0.4rem 0.8rem;
+    padding: 0.5rem 1rem;
     background: rgba(34, 211, 238, 0.1);
     border-radius: 999px;
     border: 1px solid rgba(34, 211, 238, 0.2);
+    opacity: 0;
+    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
 
   .hero-title {
-    font-size: clamp(4rem, 12vw, 8rem);
+    font-size: clamp(3rem, 8vw, 5.5rem);
     font-weight: 800;
-    line-height: 0.9;
+    line-height: 1.1;
     margin-bottom: 1.5rem;
   }
 
   .hero-line {
     display: block;
+    opacity: 0;
+    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .hero-line:nth-child(1) {
+    animation-delay: 0.2s;
+  }
+
+  .hero-line:nth-child(2) {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .hero-description {
-    font-size: 1.1rem;
+    font-size: 1.125rem;
     color: var(--text-secondary);
-    line-height: 1.7;
-    max-width: 500px;
+    line-height: 1.8;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;
+    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.6s;
   }
 
   /* SECTIONS */
@@ -486,7 +525,9 @@ const articles = [
   .reveal.visible {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+      opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   @media (max-width: 768px) {
@@ -511,7 +552,7 @@ const articles = [
   // ─── SHADER BACKGROUND ───────────────────────────────────────────
   const sc = document.getElementById('shader-canvas');
   const sgl = sc.getContext('webgl') || sc.getContext('experimental-webgl');
-  
+
   function resizeShader() {
     sc.width = innerWidth;
     sc.height = innerHeight;
@@ -566,8 +607,12 @@ void main(){
     const rl = gl.getUniformLocation(prog, 'r');
     const ml = gl.getUniformLocation(prog, 'm');
 
-    let mx = 0, my = 0;
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    let mx = 0,
+      my = 0;
+    document.addEventListener('mousemove', (e) => {
+      mx = e.clientX;
+      my = e.clientY;
+    });
 
     function animShader(ts) {
       gl.uniform1f(tl, ts * 0.001);
@@ -599,24 +644,28 @@ void main(){
     vy: (Math.random() - 0.5) * 0.2,
     r: Math.random() * 1.5 + 0.5,
     c: PARTICLE_COLORS[Math.floor(Math.random() * PARTICLE_COLORS.length)],
-    o: Math.random() * 0.2 + 0.05
+    o: Math.random() * 0.2 + 0.05,
   }));
 
-  let pmx = 0, pmy = 0;
-  document.addEventListener('mousemove', e => { pmx = e.clientX; pmy = e.clientY; });
+  let pmx = 0,
+    pmy = 0;
+  document.addEventListener('mousemove', (e) => {
+    pmx = e.clientX;
+    pmy = e.clientY;
+  });
 
   function animParticles() {
     ctx.clearRect(0, 0, pc.width, pc.height);
-    particles.forEach(p => {
+    particles.forEach((p) => {
       const dx = pmx - p.x;
       const dy = pmy - p.y;
       const d = Math.sqrt(dx * dx + dy * dy);
-      
+
       if (d < 120) {
         p.vx += (dx / d) * 0.03;
         p.vy += (dy / d) * 0.03;
       }
-      
+
       p.vx *= 0.98;
       p.vy *= 0.98;
       p.x += p.vx;
@@ -640,7 +689,7 @@ void main(){
         const dx = particles[i].x - particles[j].x;
         const dy = particles[i].y - particles[j].y;
         const d = Math.sqrt(dx * dx + dy * dy);
-        
+
         if (d < 80) {
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
@@ -658,7 +707,7 @@ void main(){
   animParticles();
 
   // ─── ARTICLE THUMB CANVASES ───────────────────────────────────
-  document.querySelectorAll('.thumb-canvas').forEach(c => {
+  document.querySelectorAll('.thumb-canvas').forEach((c) => {
     const hue = +c.dataset.hue;
     const spd = +c.dataset.speed;
     c.width = 400;
@@ -689,9 +738,12 @@ void main(){
   // ─── CURSOR ANIMATION ───────────────────────────────────────────
   const cur = document.getElementById('cursor');
   const fol = document.getElementById('cursor-follower');
-  let fx = 0, fy = 0, cx2 = 0, cy2 = 0;
+  let fx = 0,
+    fy = 0,
+    cx2 = 0,
+    cy2 = 0;
 
-  document.addEventListener('mousemove', e => {
+  document.addEventListener('mousemove', (e) => {
     cx2 = e.clientX;
     cy2 = e.clientY;
     cur.style.left = cx2 + 'px';
@@ -707,7 +759,7 @@ void main(){
   }
   animCursor();
 
-  document.querySelectorAll('a, .magnetic, .article-card').forEach(el => {
+  document.querySelectorAll('a, .magnetic, .article-card').forEach((el) => {
     el.addEventListener('mouseenter', () => {
       cur.style.width = '24px';
       cur.style.height = '24px';
@@ -725,18 +777,22 @@ void main(){
   });
 
   // ─── SCROLL REVEAL ───────────────────────────────────────────
-  const io = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => {
-          e.target.style.transition = 'opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
-          e.target.style.opacity = '1';
-          e.target.style.transform = 'translateY(0)';
-        }, i * 60);
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => {
+            e.target.style.transition =
+              'opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
+            e.target.style.opacity = '1';
+            e.target.style.transform = 'translateY(0)';
+          }, i * 60);
+          io.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -30px 0px' },
+  );
 
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 </script>

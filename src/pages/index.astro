@@ -409,8 +409,6 @@ const description = '流水不争先，争的是滔滔不绝';
     pointer-events: none;
   }
 
-
-
   /* HERO */
   #hero {
     min-height: 100vh;
@@ -1488,18 +1486,16 @@ void main(){
   }
   animCursor();
 
-  document.querySelectorAll('a, button, .magnetic').forEach((el) => {
+  document.querySelectorAll('a, button').forEach((el) => {
     el.addEventListener('mouseenter', () => {
       cur.style.width = '24px';
       cur.style.height = '24px';
-      cur.style.background = '#60A5FA';
       fol.style.transform = 'translate(-50%, -50%) scale(1.5)';
       fol.style.borderColor = 'rgba(96, 165, 250, 0.5)';
     });
     el.addEventListener('mouseleave', () => {
       cur.style.width = '10px';
       cur.style.height = '10px';
-      cur.style.background = '#60A5FA';
       fol.style.transform = 'translate(-50%, -50%) scale(1)';
       fol.style.borderColor = 'rgba(255, 255, 255, 0.2)';
     });
@@ -1620,6 +1616,4 @@ void main(){
   );
 
   document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
-
-
 </script>

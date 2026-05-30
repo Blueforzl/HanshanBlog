@@ -1,8 +1,8 @@
 ---
 import Navbar from '../components/Navbar.astro';
 
-const title = "留言板 - Hanshan";
-const description = "留下你的想法和建议";
+const title = '留言板 - Hanshan';
+const description = '留下你的想法和建议';
 ---
 
 <html lang="zh">
@@ -15,897 +15,1642 @@ const description = "留下你的想法和建议";
     <meta name="description" content={description} />
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Bebas+Neue&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg-primary: #050508;
+        --bg-secondary: #0a0a10;
+        --bg-card: rgba(255, 255, 255, 0.02);
+        --bg-card-hover: rgba(255, 255, 255, 0.04);
+        
+        --border: rgba(255, 255, 255, 0.05);
+        --border-hover: rgba(139, 92, 246, 0.4);
+        --border-focus: rgba(139, 92, 246, 0.6);
+        
+        --text-primary: #fafafa;
+        --text-secondary: #a1a1aa;
+        --text-muted: #71717a;
+        --text-subtle: #52525b;
+        
+        --accent-blue: #3b82f6;
+        --accent-violet: #8b5cf6;
+        --accent-cyan: #06b6d4;
+        --accent-purple: #a855f7;
+        --accent-pink: #ec4899;
+        --accent-amber: #f59e0b;
+        
+        --gradient: linear-gradient(135deg, #8b5cf6, #ec4899, #3b82f6);
+        --gradient-text: linear-gradient(135deg, #8b5cf6, #ec4899);
+        --gradient-cyan: linear-gradient(135deg, #06b6d4, #8b5cf6);
+        --gradient-amber: linear-gradient(135deg, #f59e0b, #ec4899);
+        
+        --font-display: 'Space Grotesk', system-ui, sans-serif;
+        --font-sans: 'Outfit', system-ui, sans-serif;
+        --font-mono: 'JetBrains Mono', monospace;
+        
+        --shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+        --shadow-glow: 0 0 60px rgba(139, 92, 246, 0.2);
+        --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.5);
+        
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 20px;
+        --radius-xl: 28px;
+        
+        --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-normal: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        
+        --icon-xs: 12px;
+        --icon-sm: 14px;
+        --icon-md: 18px;
+        --icon-lg: 22px;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        font-family: var(--font-sans);
+        line-height: 1.6;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      @media (pointer: fine) {
+        body {
+          cursor: none;
+        }
+      }
+
+      @media (pointer: coarse) {
+        #cursor,
+        #cursor-follower {
+          display: none;
+        }
+      }
+
+      /* CURSOR */
+      #cursor {
+        position: fixed;
+        width: 8px;
+        height: 8px;
+        background: var(--accent-blue);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition: width 0.2s, height 0.2s;
+        mix-blend-mode: difference;
+      }
+
+      #cursor-follower {
+        position: fixed;
+        width: 40px;
+        height: 40px;
+        border: 1.5px solid rgba(255, 255, 255, 0.15);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9998;
+        transform: translate(-50%, -50%);
+        transition: all 0.12s ease;
+      }
+
+      
+
+      /* GRID BACKGROUND */
+      #grid-bg {
+        position: fixed;
+        inset: 0;
+        background-image: 
+          linear-gradient(rgba(96, 165, 250, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(96, 165, 250, 0.03) 1px, transparent 1px);
+        background-size: 60px 60px;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      /* GRADIENT ORBS */
+      #gradient-orbs {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        opacity: 0.35;
+        animation: orbFloat 25s ease-in-out infinite;
+      }
+
+      .orb-1 {
+        width: 600px;
+        height: 600px;
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.4), rgba(236, 72, 153, 0.25));
+        top: -250px;
+        left: -150px;
+        animation-delay: 0s;
+      }
+
+      .orb-2 {
+        width: 500px;
+        height: 500px;
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.3), rgba(59, 130, 246, 0.2));
+        top: 40%;
+        right: -200px;
+        animation-delay: -8s;
+      }
+
+      .orb-3 {
+        width: 450px;
+        height: 450px;
+        background: linear-gradient(135deg, rgba(6, 182, 212, 0.25), rgba(139, 92, 246, 0.2));
+        bottom: -150px;
+        left: 30%;
+        animation-delay: -16s;
+      }
+
+      @keyframes orbFloat {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        25% { transform: translate(40px, -30px) scale(1.08); }
+        50% { transform: translate(-30px, 40px) scale(0.95); }
+        75% { transform: translate(25px, 25px) scale(1.03); }
+      }
+
+      /* NOISE TEXTURE OVERLAY */
+      #noise-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        opacity: 0.03;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      }
+
+      /* MAIN CONTENT WRAPPER */
+      #content-wrapper {
+        position: relative;
+        z-index: 20;
+        min-height: 100vh;
+      }
+
+      /* HERO SECTION */
+      #hero {
+        min-height: 70vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 8rem 2rem 4rem;
+        text-align: center;
+        position: relative;
+      }
+
+      .hero-content {
+        max-width: 800px;
+        opacity: 0;
+        animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+
+      .hero-badge {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--accent-cyan);
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+        display: inline-block;
+        padding: 0.5rem 1.25rem;
+        background: rgba(34, 211, 238, 0.08);
+        border: 1px solid rgba(34, 211, 238, 0.15);
+        border-radius: 999px;
+        animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        animation-delay: 0.1s;
+        opacity: 0;
+      }
+
+      .hero-title {
+        font-size: clamp(3rem, 10vw, 5.5rem);
+        font-weight: 800;
+        line-height: 1.05;
+        margin-bottom: 1.5rem;
+        animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        animation-delay: 0.25s;
+        opacity: 0;
+      }
+
+      .hero-title span {
+        display: block;
+        background: var(--gradient-text);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-title span:last-child {
+        font-weight: 700;
+        opacity: 0;
+        animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        animation-delay: 0.4s;
+      }
+
+      .hero-description {
+        font-size: 1.125rem;
+        color: var(--text-secondary);
+        line-height: 1.8;
+        max-width: 600px;
+        margin: 0 auto;
+        animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        animation-delay: 0.55s;
+        opacity: 0;
+      }
+
+      .hero-stats {
+        display: flex;
+        gap: 3rem;
+        justify-content: center;
+        margin-top: 3rem;
+        animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        animation-delay: 0.7s;
+        opacity: 0;
+      }
+
+      .stat-item {
+        text-align: center;
+      }
+
+      .stat-value {
+        font-size: 2.25rem;
+        font-weight: 700;
+        background: var(--gradient-text);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .stat-label {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-top: 0.25rem;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* MAIN SECTION */
+      #guestbook {
+        padding: 4rem 2rem 8rem;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .main-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 4rem;
+        align-items: start;
+      }
+
+      /* LEFT PANEL */
+      .left-panel {
+        position: sticky;
+        top: 4rem;
+        height: fit-content;
+      }
+
+      .panel-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .panel-title::before {
+        content: '';
+        width: 4px;
+        height: 24px;
+        background: var(--gradient);
+        border-radius: 2px;
+      }
+
+      .panel-description {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        line-height: 1.7;
+        margin-bottom: 2rem;
+      }
+
+      .atmosphere-text {
+        font-style: italic;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        border-left: 2px solid rgba(96, 165, 250, 0.3);
+        padding-left: 1rem;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+      }
+
+      .online-indicator {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1rem 1.25rem;
+        background: rgba(34, 211, 238, 0.06);
+        border: 1px solid rgba(34, 211, 238, 0.12);
+        border-radius: var(--radius-md);
+        margin-bottom: 2rem;
+      }
+
+      .online-dot {
+        width: 8px;
+        height: 8px;
+        background: #22d3ee;
+        border-radius: 50%;
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.5; transform: scale(0.9); }
+      }
+
+      .online-text {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .social-link {
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: all var(--transition-normal);
+        font-size: 1.1rem;
+      }
+
+      .social-link:hover {
+        background: rgba(96, 165, 250, 0.1);
+        border-color: var(--border-hover);
+        color: var(--accent-blue);
+        transform: translateY(-2px);
+      }
+
+      /* RIGHT PANEL - FORM */
+      .right-panel {
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+      }
+
+      /* GLASS FORM */
+      .guestbook-form {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-xl);
+        padding: 2.5rem;
+        position: relative;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      .guestbook-form::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: var(--gradient);
+        opacity: 0;
+        transition: opacity var(--transition-normal);
+      }
+
+      .guestbook-form:focus-within::before {
+        opacity: 1;
+      }
+
+      .form-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .form-icon {
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, rgba(96, 165, 250, 0.15), rgba(139, 92, 246, 0.15));
+        border-radius: var(--radius-md);
+        font-size: 1.25rem;
+      }
+
+      .form-title {
+        font-size: 1.375rem;
+        font-weight: 600;
+      }
+
+      .form-subtitle {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        margin-top: 0.25rem;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-label {
+        display: block;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        margin-bottom: 0.625rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+      }
+
+      .form-label .required {
+        color: var(--accent-cyan);
+        font-size: 0.65rem;
+      }
+
+      .form-input,
+      .form-textarea {
+        width: 100%;
+        padding: 1rem 1.25rem;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        color: var(--text-primary);
+        font-family: var(--font-sans);
+        font-size: 0.95rem;
+        transition: all var(--transition-normal);
+        outline: none;
+        position: relative;
+
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      .form-input::placeholder,
+      .form-textarea::placeholder {
+        color: var(--text-subtle);
+        transition: opacity var(--transition-fast);
+      }
+
+      .form-input:focus,
+      .form-textarea:focus {
+        border-color: rgba(96, 165, 250, 0.35);
+
+        background: rgba(255,255,255,0.04);
+
+        box-shadow:
+          0 0 0 4px rgba(96,165,250,.08);
+
+        transform: translateY(-1px);
+      }
+
+      .form-input:focus::placeholder,
+      .form-textarea:focus::placeholder {
+        opacity: 0.5;
+      }
+
+      .form-textarea {
+        resize: none;
+        min-height: 160px;
+        line-height: 1.6;
+      }
+
+      .char-counter {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 0.5rem;
+      }
+
+      .char-count {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        color: var(--text-muted);
+        padding: 0.25rem 0.5rem;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 6px;
+        transition: color var(--transition-fast);
+      }
+
+      .char-count.limit {
+        color: #f97316;
+      }
+
+      /* SUBMIT BUTTON */
+      .submit-btn {
+        width: 100%;
+        padding: 1rem 2rem;
+        background: var(--gradient);
+        color: white;
+        border: none;
+        border-radius: var(--radius-md);
+        font-family: var(--font-mono);
+        font-size: 0.875rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all var(--transition-normal);
+        position: relative;
+        overflow: hidden;
+        margin-top: 0.5rem;
+      }
+
+      .submit-btn::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+        opacity: 0;
+        transition: opacity var(--transition-fast);
+      }
+
+      .submit-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-glow);
+      }
+
+      .submit-btn:hover::before {
+        opacity: 1;
+      }
+
+      .submit-btn:active {
+        transform: translateY(-1px);
+      }
+
+      .submit-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .btn-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.625rem;
+      }
+
+      .btn-loading {
+        display: none;
+
+        width: 16px;
+        height: 16px;
+
+        border: 2px solid rgba(255,255,255,.3);
+        border-top-color: #fff;
+
+        border-radius: 50%;
+
+        animation: spin .8s linear infinite;
+      }
+
+      @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+
+      /* FORM MESSAGE */
+      .form-message {
+        margin-top: 1.25rem;
+        padding: 1rem 1.25rem;
+        border-radius: var(--radius-sm);
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: all var(--transition-normal);
+      }
+
+      .form-message.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .form-message.success {
+        background: rgba(34, 197, 94, 0.08);
+        border: 1px solid rgba(34, 197, 94, 0.2);
+        color: #22c55e;
+      }
+
+      .form-message.error {
+        background: rgba(239, 68, 68, 0.08);
+        border: 1px solid rgba(239, 68, 68, 0.2);
+        color: #ef4444;
+      }
+
+      /* MESSAGES LIST - NEW DESIGN */
+      .messages-section {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      .messages-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 2.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .messages-title {
+        font-family: var(--font-display);
+        font-size: 1.75rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        letter-spacing: -0.02em;
+      }
+
+      .messages-title::before {
+        content: '';
+        width: 6px;
+        height: 32px;
+        background: var(--gradient);
+        border-radius: 3px;
+      }
+
+      .messages-count {
+        background: var(--gradient);
+        color: white;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.4rem 0.875rem;
+        border-radius: 999px;
+        font-family: var(--font-mono);
+        min-width: 36px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+      }
+
+      .refresh-btn {
+        padding: 0.75rem 1.5rem;
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
+        border: 1px solid rgba(139, 92, 246, 0.2);
+        border-radius: var(--radius-md);
+        color: var(--text-secondary);
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all var(--transition-normal);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .refresh-btn::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: var(--gradient);
+        opacity: 0;
+        transition: opacity var(--transition-fast);
+      }
+
+      .refresh-btn:hover {
+        border-color: rgba(139, 92, 246, 0.4);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(139, 92, 246, 0.25);
+      }
+
+      .refresh-btn:hover::before {
+        opacity: 1;
+      }
+
+      .refresh-btn span {
+        position: relative;
+        z-index: 1;
+      }
+
+      .refresh-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .refresh-btn.spinning .refresh-icon {
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+
+      .messages-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+
+      /* MESSAGE CARD - NEW DESIGN */
+      .message-card {
+        position: relative;
+        background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: var(--radius-lg);
+        padding: 0;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+        box-shadow: 
+          0 4px 24px rgba(0,0,0,0.3),
+          inset 0 1px 0 rgba(255,255,255,0.05);
+      }
+
+      .message-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--gradient);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      .message-card:hover {
+        transform: translateY(-6px) scale(1.01);
+        border-color: rgba(139, 92, 246, 0.25);
+        box-shadow: 
+          0 20px 50px rgba(0,0,0,0.4),
+          0 0 0 1px rgba(139, 92, 246, 0.1),
+          0 0 40px rgba(139, 92, 246, 0.1);
+      }
+
+      .message-card:hover::before {
+        opacity: 1;
+      }
+
+      /* Card accent line */
+      .message-card-accent {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: var(--gradient);
+        opacity: 0.6;
+      }
+
+      .message-card-inner {
+        padding: 1.5rem 1.75rem;
+        position: relative;
+      }
+
+      .message-main {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.25rem;
+        position: relative;
+      }
+
+      /* Avatar with glow effect */
+      .message-avatar-wrapper {
+        position: relative;
+        flex-shrink: 0;
+      }
+
+      .message-avatar-wrapper::before {
+        content: '';
+        position: absolute;
+        inset: -4px;
+        background: var(--gradient);
+        border-radius: 50%;
+        opacity: 0;
+        filter: blur(12px);
+        transition: opacity 0.4s ease;
+      }
+
+      .message-card:hover .message-avatar-wrapper::before {
+        opacity: 0.4;
+      }
+
+      .message-avatar {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-display);
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: white;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 
+          0 8px 20px rgba(0,0,0,0.4),
+          inset 0 2px 4px rgba(255,255,255,0.2);
+        transition: transform 0.3s ease;
+      }
+
+      .message-avatar::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(255,255,255,0.25), transparent 60%);
+      }
+
+      .message-card:hover .message-avatar {
+        transform: scale(1.08) rotate(3deg);
+      }
+
+      .message-content-wrapper {
+        flex: 1;
+        min-width: 0;
+      }
+
+      /* Header with index badge */
+      .message-header-row {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 0.5rem;
+        flex-wrap: wrap;
+      }
+
+      .message-index {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: var(--accent-violet);
+        padding: 0.2rem 0.5rem;
+        background: rgba(139, 92, 246, 0.1);
+        border: 1px solid rgba(139, 92, 246, 0.2);
+        border-radius: 6px;
+        flex-shrink: 0;
+      }
+
+      .message-time {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+      }
+
+      .message-time svg {
+        width: 12px;
+        height: 12px;
+        opacity: 0.6;
+      }
+
+      /* Name with gradient text option */
+      .message-name {
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: 1.05rem;
+        color: var(--text-primary);
+        margin-bottom: 0.625rem;
+        letter-spacing: -0.01em;
+      }
+
+      .message-name-gradient {
+        background: var(--gradient-text);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      /* Message text with better typography */
+      .message-text {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        line-height: 1.75;
+        margin-bottom: 1rem;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        white-space: pre-wrap;
+      }
+
+      /* Contact info with icon */
+      .message-contact {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--text-subtle);
+        padding: 0.375rem 0.75rem;
+        background: rgba(255,255,255,0.03);
+        border-radius: 6px;
+        border: 1px solid rgba(255,255,255,0.05);
+      }
+
+      .message-contact svg {
+        width: 12px;
+        height: 12px;
+        opacity: 0.5;
+      }
+
+      /* Decorative corner elements */
+      .message-card-corner {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgba(139, 92, 246, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .message-card-corner.top-right {
+        top: 12px;
+        right: 12px;
+        border-left: none;
+        border-bottom: none;
+        border-top-right-radius: 8px;
+      }
+
+      .message-card-corner.bottom-left {
+        bottom: 12px;
+        left: 12px;
+        border-right: none;
+        border-top: none;
+        border-bottom-left-radius: 8px;
+      }
+
+      .message-card:hover .message-card-corner {
+        border-color: rgba(139, 92, 246, 0.5);
+        width: 28px;
+        height: 28px;
+      }
+
+      
+
+      /* EMPTY STATE & LOADING - NEW DESIGN */
+      .empty-state,
+      .loading-state {
+        text-align: center;
+        padding: 5rem 2rem;
+        background: linear-gradient(145deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: var(--radius-xl);
+        opacity: 0;
+        animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .empty-state::before,
+      .loading-state::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--gradient);
+        opacity: 0.5;
+      }
+
+      .empty-icon,
+      .loading-icon {
+        width: 64px;
+        height: 64px;
+        margin: 0 auto 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
+        border: 1px solid rgba(139, 92, 246, 0.2);
+        border-radius: 50%;
+        font-size: 1.75rem;
+      }
+
+      .empty-title,
+      .loading-title {
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        color: var(--text-primary);
+      }
+
+      .empty-desc,
+      .loading-desc {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        max-width: 300px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+
+      .loading-dots {
+        display: inline-flex;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+
+      .loading-dot {
+        width: 8px;
+        height: 8px;
+        background: var(--gradient);
+        border-radius: 50%;
+        animation: loadingDot 1.4s ease-in-out infinite;
+      }
+
+      .loading-dot:nth-child(2) { animation-delay: 0.2s; }
+      .loading-dot:nth-child(3) { animation-delay: 0.4s; }
+
+      @keyframes loadingDot {
+        0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+        40% { transform: scale(1); opacity: 1; }
+      }
+
+      /* FOOTER */
+      footer {
+        background: rgba(10, 10, 15, 0.8);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-top: 1px solid var(--border);
+        padding: 3rem 2rem;
+        margin-top: 4rem;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .footer-text {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--text-muted);
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .footer-links a {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: color var(--transition-fast);
+      }
+
+      .footer-links a:hover {
+        color: var(--accent-blue);
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 1024px) {
+        .main-grid {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+
+        .left-panel {
+          position: static;
+        }
+      }
+
+      @media (max-width: 768px) {
+        #hero {
+          padding: 6rem 1rem 3rem;
+          min-height: 60vh;
+        }
+
+        .hero-title {
+          font-size: clamp(2.5rem, 9vw, 4rem);
+        }
+
+        .hero-stats {
+          gap: 2rem;
+        }
+
+        .hero-stats .stat-value {
+          font-size: 1.75rem;
+        }
+
+        #guestbook {
+          padding: 2rem 1rem 6rem;
+        }
+
+        .guestbook-form {
+          padding: 1.75rem;
+        }
+
+        .footer-content {
+          flex-direction: column;
+          gap: 1.5rem;
+          text-align: center;
+        }
+
+        .footer-links {
+          gap: 1.5rem;
+        }
+      }
+    </style>
   </head>
   <body>
     <div id="cursor"></div>
     <div id="cursor-follower"></div>
+    <div id="grid-bg"></div>
+    <div id="gradient-orbs">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+    </div>
+    <div id="noise-overlay"></div>
 
-    <canvas id="shader-canvas"></canvas>
+    <div id="content-wrapper">
+      <Navbar activePage="guestbook" />
 
-    <Navbar activePage="guestbook" />
-
-    <section id="hero">
-      <div class="hero-content">
-        <div class="hero-badge">GUESTBOOK</div>
-        <h1 class="hero-title">
-          <span class="hero-line">留言板</span>
-        </h1>
-        <p class="hero-description">
-          欢迎留下你的想法、建议或只是打个招呼。每一条留言我都会认真阅读。
-        </p>
-      </div>
-    </section>
-
-    <section id="guestbook">
-      <div class="guestbook-container">
-        <!-- 留言表单 -->
-        <div class="guestbook-form reveal">
-          <h2 class="form-title">写下留言</h2>
-          <form id="guestbook-form">
-            <div class="form-group">
-              <label for="name">姓名 <span class="required">*</span></label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-                placeholder="你的名字"
-                maxlength="50"
-              />
+      <section id="hero">
+        <div class="hero-content">
+          <div class="hero-badge">Guestbook</div>
+          <h1 class="hero-title">
+            <span>留言板</span>
+            <span>Message Board</span>
+          </h1>
+          <p class="hero-description">
+            欢迎留下你的想法、建议或只是打个招呼。每一条留言我都会认真阅读。
+          </p>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="stat-value" id="messages-count">0</div>
+              <div class="stat-label">Total Messages</div>
             </div>
-            <div class="form-group">
-              <label for="email">邮箱</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="your@email.com（选填）"
-                maxlength="100"
-              />
+            <div class="stat-item">
+              <div class="stat-value">∞</div>
+              <div class="stat-label">Love</div>
             </div>
-            <div class="form-group">
-              <label for="message">留言 <span class="required">*</span></label>
-              <textarea
-                id="message"
-                name="message"
-                required
-                placeholder="写下你想说的..."
-                maxlength="500"
-                rows="5"
-              ></textarea>
-              <span class="char-count"><span id="char-count">0</span>/500</span>
-            </div>
-            <button type="submit" class="submit-btn" id="submit-btn">
-              <span class="btn-text">发布留言</span>
-              <span class="btn-loading" style="display: none;">发送中...</span>
-            </button>
-          </form>
-          <div id="form-message" class="form-message" style="display: none;"></div>
-        </div>
-
-        <!-- 留言列表 -->
-        <div class="guestbook-messages">
-          <h2 class="messages-title">全部留言</h2>
-          <div id="messages-list" class="messages-list">
-            <div class="loading">加载中...</div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <footer>
-      <div class="footer-content">
-        <span class="footer-text">© 2026 Hanshan. 用代码与咖啡构建。</span>
-        <div class="footer-links">
-          <a href="/">首页</a>
-          <a href="/articles">博客</a>
-          <a href="/projects">项目</a>
-          <a href="/guestbook">留言板</a>
-          <a href="/about">关于</a>
-        </div>
-      </div>
-    </footer>
-  </body>
-</html>
-
-<style>
-  *,
-  *::before,
-  *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  :root {
-    --bg-primary: #050505;
-    --bg-secondary: #0b0b0d;
-    --bg-card: rgba(255, 255, 255, 0.03);
-    --bg-card-hover: rgba(255, 255, 255, 0.05);
-    --border: rgba(255, 255, 255, 0.08);
-    --border-hover: rgba(255, 255, 255, 0.15);
-
-    --text-primary: #f5f5f5;
-    --text-secondary: #d4d4d8;
-    --text-muted: #a1a1aa;
-    --text-subtle: #71717a;
-
-    --accent-blue: #60a5fa;
-    --accent-violet: #8b5cf6;
-    --accent-cyan: #22d3ee;
-    --gradient: linear-gradient(135deg, #60a5fa, #8b5cf6, #22d3ee);
-    --gradient-text: linear-gradient(135deg, #60a5fa, #8b5cf6);
-
-    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-    --font-mono: 'JetBrains Mono', 'Space Mono', monospace;
-    --font-display: 'Bebas Neue', sans-serif;
-
-    --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  html {
-    scroll-behavior: smooth;
-    cursor: none;
-  }
-
-  body {
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-    font-family: var(--font-sans);
-    line-height: 1.6;
-    overflow-x: hidden;
-    min-height: 100vh;
-  }
-
-  /* CURSOR */
-  #cursor {
-    position: fixed;
-    width: 10px;
-    height: 10px;
-    background: var(--accent-blue);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: width 0.2s, height 0.2s, background 0.2s;
-    mix-blend-mode: difference;
-  }
-
-  #cursor-follower {
-    position: fixed;
-    width: 40px;
-    height: 40px;
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: transform 0.15s ease-out, border-color 0.2s;
-  }
-
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 1000;
-  }
-
-  #shader-canvas {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    opacity: 0.4;
-  }
-
-  /* HERO */
-  #hero {
-    min-height: 50vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 8rem 2rem 4rem;
-    position: relative;
-    z-index: 10;
-    text-align: center;
-  }
-
-  .hero-content {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .hero-badge {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--accent-cyan);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    background: rgba(34, 211, 238, 0.1);
-    border-radius: 999px;
-    border: 1px solid rgba(34, 211, 238, 0.2);
-  }
-
-  .hero-title {
-    font-size: clamp(3rem, 8vw, 5.5rem);
-    font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-  }
-
-  .hero-line {
-    display: block;
-    opacity: 0;
-    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    animation-delay: 0.2s;
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .hero-description {
-    font-size: 1.125rem;
-    color: var(--text-secondary);
-    line-height: 1.8;
-    margin-bottom: 2rem;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  /* GUESTBOOK */
-  #guestbook {
-    position: relative;
-    z-index: 10;
-    padding: 4rem 2rem;
-  }
-
-  .guestbook-container {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  /* Form */
-  .guestbook-form {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 2rem;
-    margin-bottom: 3rem;
-  }
-
-  .form-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    color: var(--text-primary);
-  }
-
-  .form-group {
-    margin-bottom: 1.25rem;
-  }
-
-  .form-group label {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    margin-bottom: 0.5rem;
-    letter-spacing: 0.05em;
-  }
-
-  .required {
-    color: #ef4444;
-  }
-
-  .form-group input,
-  .form-group textarea {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text-primary);
-    font-family: var(--font-sans);
-    font-size: 1rem;
-    transition: all var(--transition-fast);
-  }
-
-  .form-group input:focus,
-  .form-group textarea:focus {
-    outline: none;
-    border-color: var(--accent-blue);
-    background: var(--bg-card);
-  }
-
-  .form-group textarea {
-    resize: vertical;
-    min-height: 120px;
-  }
-
-  .char-count {
-    display: block;
-    text-align: right;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    margin-top: 0.5rem;
-  }
-
-  .submit-btn {
-    width: 100%;
-    padding: 0.875rem 2rem;
-    background: var(--gradient);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all var(--transition-normal);
-  }
-
-  .submit-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(96, 165, 250, 0.4);
-  }
-
-  .submit-btn:active {
-    transform: translateY(0);
-  }
-
-  .submit-btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
-  }
-
-  .form-message {
-    margin-top: 1rem;
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-  }
-
-  .form-message.success {
-    background: rgba(34, 197, 94, 0.1);
-    border: 1px solid rgba(34, 197, 94, 0.2);
-    color: #22c55e;
-  }
-
-  .form-message.error {
-    background: rgba(239, 68, 68, 0.1);
-    border: 1px solid rgba(239, 68, 68, 0.2);
-    color: #ef4444;
-  }
-
-  /* Messages List */
-  .messages-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    color: var(--text-primary);
-  }
-
-  .messages-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-  }
-
-  .message-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 1.5rem;
-    display: flex;
-    gap: 1rem;
-    transition: all var(--transition-fast);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .message-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 3px;
-    height: 100%;
-    background: var(--gradient);
-    opacity: 0;
-    transition: opacity var(--transition-fast);
-  }
-
-  .message-card:hover {
-    border-color: var(--border-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  }
-
-  .message-card:hover::before {
-    opacity: 1;
-  }
-
-  .message-avatar {
-    flex-shrink: 0;
-  }
-
-  .avatar-circle {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: white;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
-
-  .message-body {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .message-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 0.75rem;
-    gap: 1rem;
-  }
-
-  .message-author-row {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-  }
-
-  .message-author {
-    font-family: var(--font-mono);
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text-primary);
-  }
-
-  .message-email {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    opacity: 0.8;
-  }
-
-  .message-time {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    white-space: nowrap;
-  }
-
-  .message-time svg {
-    opacity: 0.6;
-  }
-
-  .message-content {
-    color: var(--text-secondary);
-    line-height: 1.7;
-    font-size: 0.95rem;
-    word-wrap: break-word;
-  }
-
-  .loading {
-    text-align: center;
-    padding: 3rem;
-    color: var(--text-muted);
-    font-family: var(--font-mono);
-  }
-
-  .empty-state {
-    text-align: center;
-    padding: 3rem;
-    color: var(--text-muted);
-  }
-
-  /* FOOTER */
-  footer {
-    background: var(--bg-secondary);
-    border-top: 1px solid var(--border);
-    padding: 2.5rem 2rem;
-    position: relative;
-    z-index: 10;
-  }
-
-  .footer-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .footer-text {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--text-muted);
-  }
-
-  .footer-links {
-    display: flex;
-    gap: 2rem;
-  }
-
-  .footer-links a {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    text-decoration: none;
-    transition: color var(--transition-fast);
-  }
-
-  .footer-links a:hover {
-    color: var(--accent-blue);
-  }
-
-  /* Reveal Animation */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  @media (max-width: 768px) {
-    #hero {
-      padding: 6rem 1rem 2rem;
-    }
-    .hero-title {
-      font-size: clamp(2.5rem, 10vw, 4rem);
-    }
-    #guestbook {
-      padding: 2rem 1rem;
-    }
-    .guestbook-form {
-      padding: 1.5rem;
-    }
-    .message-card {
-      padding: 1.25rem;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-    .message-avatar {
-      align-self: flex-start;
-    }
-    .avatar-circle {
-      width: 40px;
-      height: 40px;
-      font-size: 1rem;
-    }
-    .message-header {
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-    .message-time {
-      align-self: flex-start;
-    }
-    .footer-content {
-      flex-direction: column;
-      gap: 1rem;
-      text-align: center;
-    }
-  }
-</style>
-
-<script>
-  // ─── CURSOR ─────────────────────────────────────────────
-  const cursor = document.getElementById('cursor');
-  const cursorFollower = document.getElementById('cursor-follower');
-
-  if (window.innerWidth > 768) {
-    document.addEventListener('mousemove', (e) => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-      cursorFollower.style.left = e.clientX + 'px';
-      cursorFollower.style.top = e.clientY + 'px';
-    });
-  }
-
-  // ─── REVEAL ON SCROLL ─────────────────────────────────
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.1 }
-  );
-
-  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-
-  // ─── SHADER CANVAS ────────────────────────────────────
-  const canvas = document.getElementById('shader-canvas');
-  const gl = canvas.getContext('webgl');
-
-  if (gl) {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    gl.viewport(0, 0, canvas.width, canvas.height);
-
-    const vsSource = `
-      attribute vec2 a_position;
-      void main() {
-        gl_Position = vec4(a_position, 0, 1);
-      }
-    `;
-
-    const fsSource = `
-      precision mediump float;
-      uniform float u_time;
-      uniform vec2 u_resolution;
-
-      void main() {
-        vec2 uv = gl_FragCoord.xy / u_resolution;
-        float gradient = (sin(uv.x * 3.14 + u_time * 0.5) + cos(uv.y * 3.14 + u_time * 0.3)) * 0.5;
-        vec3 color = mix(vec3(0.02, 0.02, 0.03), vec3(0.38, 0.65, 0.98), gradient * 0.3);
-        gl_FragColor = vec4(color, 1.0);
-      }
-    `;
-
-    const vertexShader = gl.createShader(gl.VERTEX_SHADER);
-    gl.shaderSource(vertexShader, vsSource);
-    gl.compileShader(vertexShader);
-
-    const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
-    gl.shaderSource(fragmentShader, fsSource);
-    gl.compileShader(fragmentShader);
-
-    const program = gl.createProgram();
-    gl.attachShader(program, vertexShader);
-    gl.attachShader(program, fragmentShader);
-    gl.linkProgram(program);
-    gl.useProgram(program);
-
-    const vertices = new Float32Array([-1, -1, 3, -1, -1, 3]);
-    const buffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-    gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
-
-    const positionLocation = gl.getAttribLocation(program, 'a_position');
-    gl.enableVertexAttribArray(positionLocation);
-    gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
-
-    const timeLocation = gl.getUniformLocation(program, 'u_time');
-    const resolutionLocation = gl.getUniformLocation(program, 'u_resolution');
-
-    let startTime = Date.now();
-    function render() {
-      const time = (Date.now() - startTime) / 1000;
-      gl.uniform1f(timeLocation, time);
-      gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
-      gl.drawArrays(gl.TRIANGLES, 0, 3);
-      requestAnimationFrame(render);
-    }
-    render();
-  }
-
-  // ─── CHARACTER COUNT ──────────────────────────────────
-  const messageInput = document.getElementById('message');
-  const charCount = document.getElementById('char-count');
-
-  messageInput.addEventListener('input', () => {
-    charCount.textContent = messageInput.value.length;
-  });
-
-  // ─── FORM SUBMISSION ──────────────────────────────────
-  const form = document.getElementById('guestbook-form');
-  const submitBtn = document.getElementById('submit-btn');
-  const btnText = submitBtn.querySelector('.btn-text');
-  const btnLoading = submitBtn.querySelector('.btn-loading');
-  const formMessage = document.getElementById('form-message');
-  const messagesList = document.getElementById('messages-list');
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    // 禁用按钮，显示加载状态
-    submitBtn.disabled = true;
-    btnText.style.display = 'none';
-    btnLoading.style.display = 'inline';
-    formMessage.style.display = 'none';
-
-    const formData = {
-      name: document.getElementById('name').value,
-      email: document.getElementById('email').value,
-      message: messageInput.value,
-    };
-
-    try {
-      const response = await fetch('/api/guestbook', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        // 成功
-        formMessage.className = 'form-message success';
-        formMessage.textContent = '✓ 留言发布成功！';
-        formMessage.style.display = 'block';
-        form.reset();
-        charCount.textContent = '0';
-        
-        // 重新加载留言
-        loadMessages();
-      } else {
-        // 失败
-        formMessage.className = 'form-message error';
-        formMessage.textContent = '✗ ' + (result.error || '发布失败，请重试');
-        formMessage.style.display = 'block';
-      }
-    } catch (error) {
-      formMessage.className = 'form-message error';
-      formMessage.textContent = '✗ 网络错误，请重试';
-      formMessage.style.display = 'block';
-    } finally {
-      // 恢复按钮状态
-      submitBtn.disabled = false;
-      btnText.style.display = 'inline';
-      btnLoading.style.display = 'none';
-    }
-  });
-
-  // ─── LOAD MESSAGES ────────────────────────────────────
-  async function loadMessages() {
-    try {
-      const response = await fetch('/api/guestbook');
-      const result = await response.json();
-
-      // 检查是否有 warning（Supabase 未配置）
-      if (result.warning) {
-        messagesList.innerHTML = `
-          <div class="empty-state">
-            <p>⚠️ Supabase 未配置</p>
-            <p style="font-size: 0.85rem; margin-top: 0.5rem;">请先设置环境变量，详见 GUESTBOOK_SETUP.md</p>
+      </section>
+
+      <section id="guestbook">
+        <div class="main-grid">
+          <!-- Left Panel -->
+          <div class="left-panel">
+            <h2 class="panel-title">关于留言板</h2>
+            <p class="panel-description">
+              这是一个安静的角落，你可以在这里留下任何想说的话。无论是技术讨论、项目建议，还是简单的问候，我都很期待看到。
+            </p>
+            <p class="atmosphere-text">
+              "在这个数字世界里，每一条留言都是一次真实的连接。"
+            </p>
+            <div class="online-indicator">
+              <span class="online-dot"></span>
+              <span class="online-text">Online - 随时欢迎留言</span>
+            </div>
+            <div class="social-links">
+              <a href="https://github.com" target="_blank" class="social-link">☁</a>
+              <a href="mailto:test@example.com" class="social-link">✉</a>
+              <a href="https://twitter.com" target="_blank" class="social-link">✦</a>
+            </div>
           </div>
-        `;
-        return;
-      }
 
-      const messages = result.messages || [];
-
-      if (messages.length === 0) {
-        messagesList.innerHTML = '<div class="empty-state">还没有留言，来做第一个留言的人吧！</div>';
-        return;
-      }
-
-      messagesList.innerHTML = messages
-        .map((msg) => {
-          const date = new Date(msg.created_at);
-          const formattedDate = date.toLocaleDateString('zh-CN', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          });
-          const formattedTime = date.toLocaleTimeString('zh-CN', {
-            hour: '2-digit',
-            minute: '2-digit',
-          });
-
-          // 生成头像
-          const avatar = generateAvatar(msg.name);
-          const avatarColor = getAvatarColor(msg.name);
-
-          return `
-            <div class="message-card reveal visible">
-              <div class="message-avatar">
-                <div class="avatar-circle" style="background: ${avatarColor}">
-                  ${avatar}
+          <!-- Right Panel -->
+          <div class="right-panel">
+            <!-- Form -->
+            <div class="guestbook-form" id="guestbook-form-wrapper">
+              <div class="form-header">
+                <div class="form-icon">✎</div>
+                <div>
+                  <h3 class="form-title">写下留言</h3>
+                  <p class="form-subtitle">分享你的想法</p>
                 </div>
               </div>
-              <div class="message-body">
-                <div class="message-header">
-                  <div class="message-author-row">
-                    <span class="message-author">${escapeHtml(msg.name)}</span>
-                    ${msg.email ? `<span class="message-email">${escapeHtml(msg.email)}</span>` : ''}
+              <form id="guestbook-form">
+                <div class="form-group">
+                  <label class="form-label">
+                    昵称 <span class="required">*</span>
+                  </label>
+                  <input type="text" id="name" name="name" class="form-input" required placeholder="请输入您的昵称" maxlength="50" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">联系方式</label>
+                  <input type="email" id="email" name="email" class="form-input" placeholder="请输入您的联系方式（选填）" maxlength="100" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">
+                    留言 <span class="required">*</span>
+                  </label>
+                  <textarea id="message" name="message" class="form-textarea" required placeholder="写下你想说的..." maxlength="500"></textarea>
+                  <div class="char-counter">
+                    <span class="char-count" id="char-count">0/500</span>
                   </div>
-                  <div class="message-time">
+                </div>
+                <button type="submit" class="submit-btn" id="submit-btn">
+                  <span class="btn-content">
+                    <span class="btn-text">发布留言</span>
+                    <span class="btn-loading"></span>
+                  </span>
+                </button>
+              </form>
+              <div id="form-message" class="form-message"></div>
+            </div>
+
+            <!-- Messages List -->
+            <div class="messages-section" id="messages-section">
+              <div class="messages-header">
+                <h2 class="messages-title">
+                  所有留言
+                  <span class="messages-count" id="messages-badge">0</span>
+                </h2>
+                <button class="refresh-btn" id="refresh-btn">
+                  <span class="refresh-icon">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <polyline points="12 6 12 12 16 14"></polyline>
+                      <path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
                     </svg>
-                    <span>${formattedDate} ${formattedTime}</span>
+                  </span>
+                  <span>刷新</span>
+                </button>
+              </div>
+              <div id="messages-list" class="messages-list">
+                <div class="loading-state">
+                  <div class="loading-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="url(#gradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <defs>
+                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" style="stop-color:#8b5cf6"/>
+                          <stop offset="50%" style="stop-color:#ec4899"/>
+                          <stop offset="100%" style="stop-color:#3b82f6"/>
+                        </linearGradient>
+                      </defs>
+                      <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                    </svg>
+                  </div>
+                  <div class="loading-title">加载中</div>
+                  <div class="loading-desc">正在获取留言数据</div>
+                  <div class="loading-dots">
+                    <span class="loading-dot"></span>
+                    <span class="loading-dot"></span>
+                    <span class="loading-dot"></span>
                   </div>
                 </div>
-                <div class="message-content">${escapeHtml(msg.message)}</div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div class="footer-content">
+          <span class="footer-text">© 2026 Hanshan. Built with code & coffee.</span>
+          <div class="footer-links">
+            <a href="/">首页</a>
+            <a href="/articles">博客</a>
+            <a href="/projects">项目</a>
+            <a href="/guestbook">留言板</a>
+            <a href="/about">关于</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      // CURSOR ANIMATION
+      const cur = document.getElementById('cursor');
+      const fol = document.getElementById('cursor-follower');
+      let fx = 0, fy = 0, cx2 = 0, cy2 = 0;
+
+      document.addEventListener('mousemove', e => {
+        cx2 = e.clientX;
+        cy2 = e.clientY;
+        cur.style.left = cx2 + 'px';
+        cur.style.top = cy2 + 'px';
+      });
+
+      function animCursor() {
+        fx += (cx2 - fx) * 0.15;
+        fy += (cy2 - fy) * 0.15;
+        fol.style.left = fx + 'px';
+        fol.style.top = fy + 'px';
+        requestAnimationFrame(animCursor);
+      }
+      animCursor();
+
+      document.querySelectorAll('a, button, input, textarea').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cur.style.width = '20px';
+          cur.style.height = '20px';
+          fol.style.transform = 'translate(-50%, -50%) scale(1.3)';
+          fol.style.borderColor = 'rgba(96, 165, 250, 0.4)';
+        });
+        el.addEventListener('mouseleave', () => {
+          cur.style.width = '8px';
+          cur.style.height = '8px';
+          fol.style.transform = 'translate(-50%, -50%) scale(1)';
+          fol.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+        });
+      });
+
+      // CHARACTER COUNTER
+      const messageInput = document.getElementById('message');
+      const charCount = document.getElementById('char-count');
+
+      messageInput?.addEventListener('input', () => {
+        const count = messageInput.value.length;
+        charCount.textContent = `${count}/500`;
+        charCount.classList.toggle('limit', count > 450);
+      });
+
+      // AVATAR COLORS - New gradient-inspired palette
+      const avatarColors = [
+        '#8b5cf6', '#ec4899', '#3b82f6', '#06b6d4',
+        '#f59e0b', '#10b981', '#f97316', '#6366f1'
+      ];
+
+      function getAvatarColor(name) {
+        let hash = 0;
+        for (let i = 0; i < name.length; i++) {
+          hash = name.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        return avatarColors[Math.abs(hash) % avatarColors.length];
+      }
+
+      function getInitial(name) {
+        return name ? name.charAt(0).toUpperCase() : '?';
+      }
+
+      // ESCAPE HTML
+      function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      // LOAD MESSAGES
+      async function loadMessages() {
+        const messagesList = document.getElementById('messages-list');
+        const messagesBadge = document.getElementById('messages-badge');
+        const messagesCount = document.getElementById('messages-count');
+        const refreshBtn = document.getElementById('refresh-btn');
+
+        refreshBtn?.setAttribute('disabled', 'true');
+
+        try {
+          const response = await fetch('/api/guestbook');
+          const result = await response.json();
+
+          if (result.warning) {
+            messagesList.innerHTML = `
+              <div class="empty-state">
+                <div class="empty-icon">⚠</div>
+                <div class="empty-title">数据库未配置</div>
+                <div class="empty-desc">${result.warning}</div>
+              </div>
+            `;
+            messagesBadge.textContent = '0';
+            messagesCount.textContent = '0';
+            refreshBtn?.removeAttribute('disabled');
+            return;
+          }
+
+          const messages = result.messages || [];
+
+          if (messages.length === 0) {
+            messagesList.innerHTML = `
+              <div class="empty-state">
+                <div class="empty-icon">✏</div>
+                <div class="empty-title">还没有留言</div>
+                <div class="empty-desc">来做第一个留言的人吧！</div>
+              </div>
+            `;
+            messagesBadge.textContent = '0';
+            messagesCount.textContent = '0';
+            refreshBtn?.removeAttribute('disabled');
+            return;
+          }
+
+          messagesBadge.textContent = messages.length;
+          messagesCount.textContent = messages.length;
+
+          messagesList.innerHTML = messages
+            .map((msg, index) => {
+              const date = new Date(msg.created_at);
+              const formattedDate = date.toLocaleDateString('zh-CN', {
+                year: 'numeric', month: '2-digit', day: '2-digit',
+                hour: '2-digit', minute: '2-digit'
+              }).replace(/\//g, '-');
+
+              const avatarColor = getAvatarColor(msg.name);
+              const initial = getInitial(msg.name);
+              const isFirst = index === 0;
+
+              return `
+                <div class="message-card" style="animation-delay: ${index * 80}ms">
+                  <div class="message-card-accent"></div>
+                  <div class="message-card-corner top-right"></div>
+                  <div class="message-card-corner bottom-left"></div>
+                  <div class="message-card-inner">
+                    <div class="message-main">
+                      <div class="message-avatar-wrapper">
+                        <div class="message-avatar" style="background: ${avatarColor}">${initial}</div>
+                      </div>
+                      <div class="message-content-wrapper">
+                        <div class="message-header-row">
+                          <span class="message-index">#${String(index + 1).padStart(3, '0')}</span>
+                          <span class="message-time">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                              <line x1="16" y1="2" x2="16" y2="6"></line>
+                              <line x1="8" y1="2" x2="8" y2="6"></line>
+                              <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            ${formattedDate}
+                          </span>
+                        </div>
+                        <div class="message-name ${isFirst ? 'message-name-gradient' : ''}">${escapeHtml(msg.name)}</div>
+                        <div class="message-text">${escapeHtml(msg.message)}</div>
+                        ${msg.email ? `
+                          <div class="message-contact">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                              <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                            ${escapeHtml(msg.email)}
+                          </div>
+                        ` : ''}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              `;
+            })
+            .join('');
+
+          setTimeout(() => {
+            document.querySelectorAll('.message-card').forEach((card, index) => {
+              setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+              }, index * 80);
+            });
+          }, 100);
+
+        } catch (error) {
+          messagesList.innerHTML = `
+            <div class="empty-state">
+              <div class="empty-icon">✗</div>
+              <div class="empty-title">加载失败</div>
+              <div class="empty-desc">请刷新重试</div>
             </div>
           `;
-        })
-        .join('');
-    } catch (error) {
-      messagesList.innerHTML = '<div class="empty-state">加载失败，请刷新重试</div>';
-    }
-  }
+          messagesBadge.textContent = '0';
+          messagesCount.textContent = '0';
+        } finally {
+          refreshBtn?.removeAttribute('disabled');
+        }
+      }
 
-  function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-  }
+      // FORM SUBMISSION
+      const form = document.getElementById('guestbook-form');
+      const submitBtn = document.getElementById('submit-btn');
+      const formMessage = document.getElementById('form-message');
 
-  // 生成头像文字（取姓名首字母或第一个字符）
-  function generateAvatar(name) {
-    if (!name) return '?';
-    const trimmed = name.trim();
-    if (trimmed.length === 0) return '?';
-    // 如果是中文，取第一个字；如果是英文，取首字母大写
-    if (/^[\u4e00-\u9fa5]/.test(trimmed)) {
-      return trimmed.charAt(0);
-    }
-    return trimmed.charAt(0).toUpperCase();
-  }
+      form?.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-  // 根据姓名生成头像颜色
-  function getAvatarColor(name) {
-    const colors = [
-      'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-      'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-      'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-      'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
-      'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
-      'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
-      'linear-gradient(135deg, #d299c2 0%, #fef9d7 100%)',
-      'linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)',
-      'linear-gradient(135deg, #fddb92 0%, #d1fdff 100%)',
-      'linear-gradient(135deg, #9890e3 0%, #b1f4cf 100%)',
-    ];
-    
-    // 根据姓名哈希选择颜色
-    let hash = 0;
-    for (let i = 0; i < name.length; i++) {
-      hash = name.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    const index = Math.abs(hash) % colors.length;
-    return colors[index];
-  }
+        if (!submitBtn || !formMessage) return;
 
-  // 初始加载留言
-  loadMessages();
-</script>
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnLoading = submitBtn.querySelector('.btn-loading');
+
+        submitBtn.disabled = true;
+        btnText.style.display = 'none';
+        btnLoading.style.display = 'inline';
+        formMessage.classList.remove('visible');
+
+        const formData = {
+          name: document.getElementById('name').value,
+          email: document.getElementById('email').value,
+          message: messageInput.value,
+        };
+
+        try {
+          const response = await fetch('/api/guestbook', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData),
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+            formMessage.className = 'form-message success visible';
+            formMessage.innerHTML = '<span>✓</span> 留言发布成功！';
+            form.reset();
+            charCount.textContent = '0/500';
+            loadMessages();
+
+            setTimeout(() => {
+              formMessage.classList.remove('visible');
+            }, 3000);
+          } else {
+            formMessage.className = 'form-message error visible';
+            formMessage.innerHTML = `<span>✗</span> ${result.error || '发布失败'}`;
+          }
+        } catch (error) {
+          formMessage.className = 'form-message error visible';
+          formMessage.innerHTML = '<span>✗</span> 网络错误，请重试';
+        } finally {
+          submitBtn.disabled = false;
+          btnText.style.display = 'inline';
+          btnLoading.style.display = 'none';
+        }
+      });
+
+      // PAGE ANIMATIONS ON LOAD
+      document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+          const formWrapper = document.getElementById('guestbook-form-wrapper');
+          const messagesSection = document.getElementById('messages-section');
+          
+          if (formWrapper) {
+            formWrapper.style.opacity = '1';
+            formWrapper.style.transform = 'translateY(0)';
+          }
+          
+          setTimeout(() => {
+            if (messagesSection) {
+              messagesSection.style.opacity = '1';
+              messagesSection.style.transform = 'translateY(0)';
+            }
+          }, 200);
+        }, 500);
+
+        loadMessages();
+      });
+    </script>
+  </body>
+</html>

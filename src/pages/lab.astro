@@ -1,8 +1,8 @@
 ---
 import Navbar from '../components/Navbar.astro';
 
-const title = "Lab - Hanshan";
-const description = "动效实验室，探索 WebGL、动画与交互的边界";
+const title = 'Lab - Hanshan';
+const description = '动效实验室，探索 WebGL、动画与交互的边界';
 
 const experiments = [
   {
@@ -10,29 +10,29 @@ const experiments = [
     title: '粒子系统',
     category: 'WebGL',
     description: '高性能粒子系统，支持百万级粒子实时渲染',
-    demo: 'particles'
+    demo: 'particles',
   },
   {
     id: 'shader',
     title: 'Shader 流体',
     category: 'GLSL',
     description: '实时流体模拟，基于 Simplex Noise',
-    demo: 'shader'
+    demo: 'shader',
   },
   {
     id: 'waves',
     title: '波形可视化',
     category: 'Canvas',
     description: '音频驱动的波形动画效果',
-    demo: 'waves'
+    demo: 'waves',
   },
   {
     id: 'morphing',
     title: '形态变换',
     category: 'Animation',
     description: 'SVG 路径变形动画效果',
-    demo: 'morphing'
-  }
+    demo: 'morphing',
+  },
 ];
 ---
 
@@ -46,22 +46,44 @@ const experiments = [
     <meta name="description" content={description} />
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
     <style>
       :root {
         --bg-primary: #050505;
-        --bg-secondary: #111113;
-        --bg-card: rgba(255,255,255,0.04);
-        --border-color: rgba(255,255,255,0.08);
-        --text-primary: #F5F5F5;
-        --text-secondary: #D4D4D8;
-        --text-subtle: #A1A1AA;
-        --text-muted: #71717A;
-        --accent-blue: #60A5FA;
-        --accent-violet: #8B5CF6;
-        --accent-cyan: #22D3EE;
-        --transition-fast: 0.2s ease;
-        --transition-normal: 0.4s ease;
+        --bg-secondary: #0b0b0d;
+        --bg-card: rgba(255, 255, 255, 0.03);
+        --bg-card-hover: rgba(255, 255, 255, 0.05);
+        --border: rgba(255, 255, 255, 0.08);
+        --border-hover: rgba(255, 255, 255, 0.15);
+
+        --text-primary: #f5f5f5;
+        --text-secondary: #d4d4d8;
+        --text-muted: #a1a1aa;
+        --text-subtle: #71717a;
+
+        --accent-blue: #60a5fa;
+        --accent-violet: #8b5cf6;
+        --accent-cyan: #22d3ee;
+        --gradient: linear-gradient(135deg, #60a5fa, #8b5cf6, #22d3ee);
+        --gradient-text: linear-gradient(135deg, #60a5fa, #8b5cf6);
+
+        --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+        --font-mono: 'JetBrains Mono', 'Space Mono', monospace;
+        --font-display: 'Bebas Neue', sans-serif;
+
+        --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+        --shadow-hover: 0 8px 32px rgba(96, 165, 250, 0.15);
+
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 16px;
+
+        --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
       * {
@@ -75,7 +97,7 @@ const experiments = [
       }
 
       body {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-family: var(--font-sans);
         background-color: var(--bg-primary);
         color: var(--text-primary);
         line-height: 1.6;
@@ -103,7 +125,10 @@ const experiments = [
         pointer-events: none;
         z-index: 9999;
         transform: translate(-50%, -50%);
-        transition: width 0.2s, height 0.2s, background 0.2s;
+        transition:
+          width 0.2s,
+          height 0.2s,
+          background 0.2s;
         mix-blend-mode: difference;
       }
 
@@ -111,15 +136,39 @@ const experiments = [
         position: fixed;
         width: 40px;
         height: 40px;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 1.5px solid rgba(255, 255, 255, 0.2);
         border-radius: 50%;
         pointer-events: none;
         z-index: 9998;
         transform: translate(-50%, -50%);
-        transition: transform 0.15s ease-out, border-color 0.2s;
+        transition: all 0.12s ease;
+        mix-blend-mode: difference;
       }
 
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 1000;
+      }
 
+      #shader-canvas {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        opacity: 0.4;
+        background: #050505;
+      }
+
+      #particle-canvas {
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        background: transparent;
+      }
 
       #hero {
         min-height: 100vh;
@@ -128,7 +177,7 @@ const experiments = [
         justify-content: center;
         padding: 8rem 2rem 4rem;
         position: relative;
-        z-index: 1;
+        z-index: 10;
       }
 
       .hero-content {
@@ -146,10 +195,12 @@ const experiments = [
         font-size: 0.75rem;
         color: var(--accent-blue);
         margin-bottom: 1.5rem;
+        opacity: 0;
+        animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
       }
 
       .hero-title {
-        font-size: clamp(3rem, 12vw, 5rem);
+        font-size: clamp(3rem, 10vw, 5rem);
         font-weight: 800;
         line-height: 1.1;
         margin-bottom: 1.5rem;
@@ -161,6 +212,27 @@ const experiments = [
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
+        opacity: 0;
+        animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+
+      .hero-line:nth-child(1) {
+        animation-delay: 0.2s;
+      }
+
+      .hero-line:nth-child(2) {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       .hero-description {
@@ -168,6 +240,9 @@ const experiments = [
         color: var(--text-secondary);
         max-width: 600px;
         margin: 0 auto;
+        opacity: 0;
+        animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        animation-delay: 0.6s;
       }
 
       #experiments {
@@ -209,10 +284,22 @@ const experiments = [
       .experiment-card {
         position: relative;
         background: var(--bg-card);
-        border: 1px solid var(--border-color);
+        border: 1px solid var(--border);
         border-radius: 12px;
         overflow: hidden;
-        transition: transform 0.3s ease, border-color 0.3s ease;
+        transition:
+          transform 0.3s ease,
+          border-color 0.3s ease;
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      .experiment-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+        transition:
+          opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+          transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
       .experiment-card:hover {
@@ -277,7 +364,7 @@ const experiments = [
         margin: 4rem auto 0;
         padding: 2rem;
         background: var(--bg-card);
-        border: 1px solid var(--border-color);
+        border: 1px solid var(--border);
         border-radius: 12px;
         text-align: center;
       }
@@ -304,7 +391,9 @@ const experiments = [
         font-size: 0.9rem;
         font-weight: 500;
         cursor: pointer;
-        transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+        transition:
+          transform var(--transition-fast),
+          box-shadow var(--transition-fast);
       }
 
       .demo-controls button:hover {
@@ -315,7 +404,7 @@ const experiments = [
       footer {
         padding: 4rem 2rem;
         background: var(--bg-secondary);
-        border-top: 1px solid var(--border-color);
+        border-top: 1px solid var(--border);
         position: relative;
         z-index: 1;
       }
@@ -370,6 +459,7 @@ const experiments = [
     <div id="cursor"></div>
     <div id="cursor-follower"></div>
     <canvas id="shader-canvas"></canvas>
+    <canvas id="particle-canvas"></canvas>
 
     <Navbar activePage="lab" />
 
@@ -380,9 +470,7 @@ const experiments = [
           <span class="hero-line">动效</span>
           <span class="hero-line">实验室</span>
         </h1>
-        <p class="hero-description">
-          探索 WebGL、动画与交互的边界。这里是我实验和探索新技术的地方。
-        </p>
+        <p class="hero-description">探索 WebGL、动画与交互的边界。这里是我实验和探索新技术的地方。</p>
       </div>
     </section>
 
@@ -393,17 +481,19 @@ const experiments = [
       </div>
 
       <div class="experiments-grid">
-        {experiments.map((exp, index) => (
-          <div class="experiment-card" style={{ animationDelay: `${index * 0.1}s` }} data-demo={exp.demo}>
-            <canvas class="exp-canvas" id={`canvas-${exp.id}`}></canvas>
-            <div class="exp-overlay">
-              <span class="exp-category">{exp.category}</span>
-              <h3 class="exp-title">{exp.title}</h3>
-              <p class="exp-description">{exp.description}</p>
-              <button class="exp-button">运行演示</button>
+        {
+          experiments.map((exp, index) => (
+            <div class="experiment-card" style={{ animationDelay: `${index * 0.1}s` }} data-demo={exp.demo}>
+              <canvas class="exp-canvas" id={`canvas-${exp.id}`} />
+              <div class="exp-overlay">
+                <span class="exp-category">{exp.category}</span>
+                <h3 class="exp-title">{exp.title}</h3>
+                <p class="exp-description">{exp.description}</p>
+                <button class="exp-button">运行演示</button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
 
       <div class="demo-controls">
@@ -423,9 +513,7 @@ const experiments = [
           <li><a href="/projects">Projects</a></li>
           <li><a href="/about">About</a></li>
         </ul>
-        <div class="footer-copyright">
-          2024 Conor Liu. All rights reserved.
-        </div>
+        <div class="footer-copyright">2024 Conor Liu. All rights reserved.</div>
       </div>
     </footer>
 
@@ -433,16 +521,19 @@ const experiments = [
       const sc = document.getElementById('shader-canvas');
       const sgl = sc.getContext('webgl') || sc.getContext('experimental-webgl');
 
-      function resizeShader() {
-        sc.width = innerWidth;
-        sc.height = innerHeight;
-        if (sgl) sgl.viewport(0, 0, sc.width, sc.height);
+      function resizeCanvas(canvas) {
+        canvas.width = innerWidth;
+        canvas.height = innerHeight;
       }
-      resizeShader();
-      window.addEventListener('resize', resizeShader);
+
+      resizeCanvas(sc);
+      window.addEventListener('resize', () => resizeCanvas(sc));
 
       if (sgl) {
         const gl = sgl;
+        gl.clearColor(0.02, 0.02, 0.02, 1);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+
         const vs = `attribute vec2 p;void main(){gl_Position=vec4(p,0,1);}`;
         const fs = `precision highp float;
           uniform float t;uniform vec2 r;uniform vec2 m;
@@ -478,7 +569,7 @@ const experiments = [
 
         const buf = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
         const loc = gl.getAttribLocation(prog, 'p');
         gl.enableVertexAttribArray(loc);
         gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
@@ -488,7 +579,10 @@ const experiments = [
         const ml = gl.getUniformLocation(prog, 'm');
 
         let mx = 0, my = 0;
-        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+        document.addEventListener('mousemove', (e) => {
+          mx = e.clientX;
+          my = e.clientY;
+        });
 
         function animShader(ts) {
           gl.uniform1f(tl, ts * 0.001);
@@ -500,11 +594,50 @@ const experiments = [
         requestAnimationFrame(animShader);
       }
 
+      const pc = document.getElementById('particle-canvas');
+      const pctx = pc.getContext('2d');
+      resizeCanvas(pc);
+      window.addEventListener('resize', () => resizeCanvas(pc));
+
+      const particles = [];
+      for (let i = 0; i < 50; i++) {
+        particles.push({
+          x: Math.random() * pc.width,
+          y: Math.random() * pc.height,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5,
+          size: Math.random() * 2 + 0.5,
+          alpha: Math.random() * 0.5 + 0.1
+        });
+      }
+
+      function animateParticles() {
+        pctx.clearRect(0, 0, pc.width, pc.height);
+        
+        particles.forEach((p) => {
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < 0) p.x = pc.width;
+          if (p.x > pc.width) p.x = 0;
+          if (p.y < 0) p.y = pc.height;
+          if (p.y > pc.height) p.y = 0;
+
+          pctx.beginPath();
+          pctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          pctx.fillStyle = `rgba(96, 165, 250, ${p.alpha})`;
+          pctx.fill();
+        });
+
+        requestAnimationFrame(animateParticles);
+      }
+      animateParticles();
+
       const cur = document.getElementById('cursor');
       const fol = document.getElementById('cursor-follower');
       let fx = 0, fy = 0, cx2 = 0, cy2 = 0;
 
-      document.addEventListener('mousemove', e => {
+      document.addEventListener('mousemove', (e) => {
         cx2 = e.clientX;
         cy2 = e.clientY;
         cur.style.left = cx2 + 'px';
@@ -520,7 +653,7 @@ const experiments = [
       }
       animCursor();
 
-      document.querySelectorAll('a, button').forEach(el => {
+      document.querySelectorAll('a, button').forEach((el) => {
         el.addEventListener('mouseenter', () => {
           cur.style.width = '24px';
           cur.style.height = '24px';
@@ -539,23 +672,24 @@ const experiments = [
         const canvas = document.getElementById('canvas-particles');
         const ctx = canvas.getContext('2d');
         const particles = [];
-        const particleCount = 100;
+        const particleCount = 80;
 
         for (let i = 0; i < particleCount; i++) {
           particles.push({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
-            vx: (Math.random() - 0.5) * 2,
-            vy: (Math.random() - 0.5) * 2,
-            size: Math.random() * 3 + 1
+            vx: (Math.random() - 0.5) * 1.5,
+            vy: (Math.random() - 0.5) * 1.5,
+            size: Math.random() * 2 + 1,
+            hue: Math.random() * 60 + 180
           });
         }
 
         function animate() {
-          ctx.fillStyle = 'rgba(5, 5, 5, 0.1)';
+          ctx.fillStyle = 'rgba(5, 5, 10, 0.15)';
           ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-          particles.forEach(p => {
+          particles.forEach((p) => {
             p.x += p.vx;
             p.y += p.vy;
 
@@ -564,7 +698,7 @@ const experiments = [
 
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(96, 165, 250, 0.8)';
+            ctx.fillStyle = `hsla(${p.hue}, 80%, 60%, 0.7)`;
             ctx.fill();
           });
 
@@ -576,7 +710,7 @@ const experiments = [
       function runShaderDemo() {
         const canvas = document.getElementById('canvas-shader');
         const gl = canvas.getContext('webgl');
-        
+
         if (!gl) return;
 
         const vs = `attribute vec2 p;void main(){gl_Position=vec4(p,0,1);}`;
@@ -609,7 +743,7 @@ const experiments = [
 
         const buf = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
         const loc = gl.getAttribLocation(prog, 'p');
         gl.enableVertexAttribArray(loc);
         gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
@@ -632,26 +766,107 @@ const experiments = [
         let time = 0;
 
         function animate() {
-          ctx.fillStyle = 'rgba(5, 5, 5, 0.1)';
+          ctx.fillStyle = 'rgba(5, 5, 10, 0.15)';
           ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-          ctx.beginPath();
-          ctx.moveTo(0, canvas.height / 2);
+          for (let wave = 0; wave < 3; wave++) {
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height / 2);
+            const offset = wave * Math.PI * 0.6;
+            const amplitude = 25 - wave * 5;
 
-          for (let x = 0; x < canvas.width; x++) {
-            const y = canvas.height / 2 + Math.sin(x * 0.02 + time) * 30 + Math.sin(x * 0.01 + time * 0.5) * 20;
-            ctx.lineTo(x, y);
+            for (let x = 0; x < canvas.width; x++) {
+              const y = canvas.height / 2 + 
+                Math.sin(x * 0.02 + time + offset) * amplitude + 
+                Math.sin(x * 0.01 + time * 0.5 + offset) * (amplitude * 0.5);
+              ctx.lineTo(x, y);
+            }
+
+            ctx.strokeStyle = `rgba(${100 + wave * 30}, ${165 + wave * 20}, ${250 - wave * 30}, 0.6)`;
+            ctx.lineWidth = 2 - wave * 0.3;
+            ctx.stroke();
           }
 
-          ctx.strokeStyle = 'rgba(96, 165, 250, 0.8)';
-          ctx.lineWidth = 2;
-          ctx.stroke();
-
-          time += 0.05;
+          time += 0.04;
           requestAnimationFrame(animate);
         }
         animate();
       }
+
+      function runMorphingDemo() {
+        const canvas = document.getElementById('canvas-morphing');
+        const ctx = canvas.getContext('2d');
+        let time = 0;
+
+        const shapes = [
+          (t) => ({ x: Math.cos(t) * 50, y: Math.sin(t) * 50 }),
+          (t) => ({ x: Math.cos(t) * 40, y: Math.sin(t * 2) * 60 }),
+          (t) => ({ x: Math.cos(t * 1.5) * 60, y: Math.sin(t) * 40 }),
+          (t) => ({ x: Math.cos(t) * 30, y: Math.sin(t * 3) * 30 })
+        ];
+
+        function animate() {
+          ctx.fillStyle = 'rgba(5, 5, 10, 0.15)';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          const centerX = canvas.width / 2;
+          const centerY = canvas.height / 2;
+          const shapeIndex = Math.floor(time * 0.5) % shapes.length;
+          const nextShapeIndex = (shapeIndex + 1) % shapes.length;
+          const morphFactor = (time * 0.5) % 1;
+
+          ctx.beginPath();
+          for (let i = 0; i <= 100; i++) {
+            const t = (i / 100) * Math.PI * 2;
+            const s1 = shapes[shapeIndex](t);
+            const s2 = shapes[nextShapeIndex](t);
+            
+            const x = centerX + (s1.x * (1 - morphFactor) + s2.x * morphFactor);
+            const y = centerY + (s1.y * (1 - morphFactor) + s2.y * morphFactor);
+
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          }
+          ctx.closePath();
+
+          const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 60);
+          gradient.addColorStop(0, 'rgba(139, 92, 246, 0.4)');
+          gradient.addColorStop(1, 'rgba(96, 165, 250, 0.2)');
+          ctx.fillStyle = gradient;
+          ctx.fill();
+
+          ctx.strokeStyle = 'rgba(139, 92, 246, 0.6)';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+
+          time += 0.02;
+          requestAnimationFrame(animate);
+        }
+        animate();
+      }
+
+      document.querySelectorAll('.exp-button').forEach((btn, index) => {
+        btn.addEventListener('click', () => {
+          const demos = [runParticleDemo, runShaderDemo, runWaveDemo, runMorphingDemo];
+          if (demos[index]) demos[index]();
+        });
+      });
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+              setTimeout(() => {
+                entry.target.classList.add('visible');
+              }, index * 100);
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -50px 0px' },
+      );
+
+      document.querySelectorAll('.experiment-card').forEach((el) => io.observe(el));
     </script>
   </body>
 </html>

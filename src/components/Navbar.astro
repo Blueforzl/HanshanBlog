@@ -19,20 +19,19 @@ const navItems = [
   <div class="nav-container">
     <a href="/" class="logo magnetic">HS</a>
     <ul class="nav-links">
-      {navItems.map((item) => (
-        <li>
-          <a
-            href={item.href}
-            class:list={['nav-link', { active: item.id === activePage }]}
-          >
-            {item.label}
-          </a>
-        </li>
-      ))}
+      {
+        navItems.map((item) => (
+          <li>
+            <a href={item.href} class:list={['nav-link', { active: item.id === activePage }]}>
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
     </ul>
     <div class="nav-controls">
       <button id="theme-toggle" class="control-btn" aria-label="Toggle theme">
-        <span id="theme-icon">🌙</span>
+        <!-- <span id="theme-icon">🌙</span> -->
       </button>
     </div>
     <div class="nav-status">

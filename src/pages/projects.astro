@@ -1,8 +1,8 @@
 ---
 import Navbar from '../components/Navbar.astro';
 
-const title = "Projects - Hanshan";
-const description = "精选项目作品，涵盖全栈开发、WebGL 可视化、AI 工具等领域";
+const title = 'Projects - Hanshan';
+const description = '精选项目作品，涵盖全栈开发、WebGL 可视化、AI 工具等领域';
 
 const projects = [
   {
@@ -12,7 +12,7 @@ const projects = [
     tags: ['TypeScript', 'AI', 'API'],
     hue: 220,
     speed: 1.2,
-    size: 'large'
+    size: 'large',
   },
   {
     slug: 'ai-memory',
@@ -21,7 +21,7 @@ const projects = [
     tags: ['TypeScript', 'AI', 'Knowledge'],
     hue: 280,
     speed: 1.0,
-    size: 'medium'
+    size: 'medium',
   },
   {
     slug: 'shader-playground',
@@ -30,7 +30,7 @@ const projects = [
     tags: ['WebGL', 'GLSL', 'Visualization'],
     hue: 180,
     speed: 1.5,
-    size: 'medium'
+    size: 'medium',
   },
   {
     slug: 'particle-system',
@@ -39,7 +39,7 @@ const projects = [
     tags: ['WebGL', 'Animation', 'Performance'],
     hue: 320,
     speed: 1.8,
-    size: 'small'
+    size: 'small',
   },
   {
     slug: 'realtime-charts',
@@ -48,7 +48,7 @@ const projects = [
     tags: ['React', 'Visualization', 'Data'],
     hue: 140,
     speed: 0.8,
-    size: 'small'
+    size: 'small',
   },
   {
     slug: 'micro-frontends',
@@ -57,8 +57,8 @@ const projects = [
     tags: ['React', 'Architecture', 'Monorepo'],
     hue: 60,
     speed: 1.0,
-    size: 'large'
-  }
+    size: 'large',
+  },
 ];
 ---
 
@@ -72,10 +72,12 @@ const projects = [
     <meta name="description" content={description} />
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-
     <div id="cursor"></div>
     <div id="cursor-follower"></div>
 
@@ -98,21 +100,27 @@ const projects = [
 
     <section id="projects">
       <div class="bento-grid">
-        {projects.map((project, index) => (
-          <a href={`/project/${project.slug}`} class={`bento-card ${project.size} reveal`} style={{ animationDelay: `${index * 0.1}s` }}>
-            <canvas class="card-canvas" data-hue={project.hue} data-speed={project.speed}></canvas>
-            <div class="card-content">
-              <div class="card-tags">
-                {project.tags.map((tag) => (
-                  <span class="tag">{tag}</span>
-                ))}
+        {
+          projects.map((project, index) => (
+            <a
+              href={`/project/${project.slug}`}
+              class={`bento-card ${project.size} reveal`}
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <canvas class="card-canvas" data-hue={project.hue} data-speed={project.speed} />
+              <div class="card-content">
+                <div class="card-tags">
+                  {project.tags.map((tag) => (
+                    <span class="tag">{tag}</span>
+                  ))}
+                </div>
+                <h3 class="card-title">{project.title}</h3>
+                <p class="card-excerpt">{project.excerpt}</p>
+                <span class="card-arrow">→</span>
               </div>
-              <h3 class="card-title">{project.title}</h3>
-              <p class="card-excerpt">{project.excerpt}</p>
-              <span class="card-arrow">→</span>
-            </div>
-          </a>
-        ))}
+            </a>
+          ))
+        }
       </div>
     </section>
 
@@ -127,12 +135,13 @@ const projects = [
         </div>
       </div>
     </footer>
-
   </body>
 </html>
 
 <style>
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -140,30 +149,30 @@ const projects = [
 
   :root {
     --bg-primary: #050505;
-    --bg-secondary: #0B0B0D;
+    --bg-secondary: #0b0b0d;
     --bg-card: rgba(255, 255, 255, 0.03);
     --border: rgba(255, 255, 255, 0.08);
     --border-hover: rgba(255, 255, 255, 0.15);
-    
-    --text-primary: #F5F5F5;
-    --text-secondary: #D4D4D8;
-    --text-muted: #A1A1AA;
-    --text-subtle: #71717A;
-    
-    --accent-blue: #60A5FA;
-    --accent-violet: #8B5CF6;
-    --accent-cyan: #22D3EE;
-    --gradient: linear-gradient(135deg, #60A5FA, #8B5CF6, #22D3EE);
-    --gradient-text: linear-gradient(135deg, #60A5FA, #8B5CF6);
-    
+
+    --text-primary: #f5f5f5;
+    --text-secondary: #d4d4d8;
+    --text-muted: #a1a1aa;
+    --text-subtle: #71717a;
+
+    --accent-blue: #60a5fa;
+    --accent-violet: #8b5cf6;
+    --accent-cyan: #22d3ee;
+    --gradient: linear-gradient(135deg, #60a5fa, #8b5cf6, #22d3ee);
+    --gradient-text: linear-gradient(135deg, #60a5fa, #8b5cf6);
+
     --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
     --font-mono: 'JetBrains Mono', 'Space Mono', monospace;
     --font-display: 'Bebas Neue', sans-serif;
-    
+
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 16px;
-    
+
     --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -193,7 +202,10 @@ const projects = [
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
-    transition: width 0.2s, height 0.2s, background 0.2s;
+    transition:
+      width 0.2s,
+      height 0.2s,
+      background 0.2s;
     mix-blend-mode: difference;
   }
 
@@ -227,8 +239,6 @@ const projects = [
     z-index: 0;
     opacity: 0.2;
   }
-
-
 
   /* HERO */
   #hero {
@@ -270,9 +280,11 @@ const projects = [
     animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
 
-  .hero-line:nth-child(1) { animation-delay: 0.1s; }
-  .hero-line:nth-child(2) { 
-    animation-delay: 0.3s; 
+  .hero-line:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .hero-line:nth-child(2) {
+    animation-delay: 0.3s;
     background: var(--gradient-text);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -467,7 +479,9 @@ const projects = [
   .reveal.visible {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+      opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   @media (max-width: 1024px) {
@@ -516,7 +530,7 @@ const projects = [
   // ─── SHADER BACKGROUND ───────────────────────────────────────────
   const sc = document.getElementById('shader-canvas');
   const sgl = sc.getContext('webgl') || sc.getContext('experimental-webgl');
-  
+
   function resizeShader() {
     sc.width = innerWidth;
     sc.height = innerHeight;
@@ -571,8 +585,12 @@ void main(){
     const rl = gl.getUniformLocation(prog, 'r');
     const ml = gl.getUniformLocation(prog, 'm');
 
-    let mx = 0, my = 0;
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    let mx = 0,
+      my = 0;
+    document.addEventListener('mousemove', (e) => {
+      mx = e.clientX;
+      my = e.clientY;
+    });
 
     function animShader(ts) {
       gl.uniform1f(tl, ts * 0.001);
@@ -587,9 +605,12 @@ void main(){
   // ─── CURSOR ANIMATION ───────────────────────────────────────────
   const cur = document.getElementById('cursor');
   const fol = document.getElementById('cursor-follower');
-  let fx = 0, fy = 0, cx2 = 0, cy2 = 0;
+  let fx = 0,
+    fy = 0,
+    cx2 = 0,
+    cy2 = 0;
 
-  document.addEventListener('mousemove', e => {
+  document.addEventListener('mousemove', (e) => {
     cx2 = e.clientX;
     cy2 = e.clientY;
     cur.style.left = cx2 + 'px';
@@ -605,7 +626,7 @@ void main(){
   }
   animCursor();
 
-  document.querySelectorAll('a, .magnetic').forEach(el => {
+  document.querySelectorAll('a, .magnetic').forEach((el) => {
     el.addEventListener('mouseenter', () => {
       cur.style.width = '24px';
       cur.style.height = '24px';
@@ -623,7 +644,7 @@ void main(){
   });
 
   // ─── CARD CANVASES ───────────────────────────────────────────
-  document.querySelectorAll('.card-canvas').forEach(canvas => {
+  document.querySelectorAll('.card-canvas').forEach((canvas) => {
     const c = canvas;
     const gl = c.getContext('webgl') || c.getContext('experimental-webgl');
     if (!gl) return;
@@ -689,18 +710,22 @@ void main(){
   });
 
   // ─── SCROLL REVEAL ───────────────────────────────────────────
-  const io = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => {
-          e.target.style.transition = 'opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
-          e.target.style.opacity = '1';
-          e.target.style.transform = 'translateY(0)';
-        }, i * 80);
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => {
+            e.target.style.transition =
+              'opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
+            e.target.style.opacity = '1';
+            e.target.style.transform = 'translateY(0)';
+          }, i * 80);
+          io.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -30px 0px' },
+  );
 
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 </script>
