@@ -238,20 +238,20 @@ const description = '流水不争先，争的是滔滔不绝';
           <span class="section-label">关于我</span>
           <h2 class="section-title">有目的的构建 <span class="gradient-text">数字体验</span></h2>
           <p class="about-desc">
-            拥有 8 年以上经验，从传统前端开发逐步转型为 AI 全栈架构师。 热衷于创建美观、高性能且智能的 Web
+            拥有 1.5 年以上经验，从传统前端开发逐步转型为 AI 全栈架构师。 热衷于创建美观、高性能且智能的 Web
             应用，不断突破技术边界。
           </p>
           <div class="about-stats">
             <div class="stat-item">
-              <span class="stat-value">7+</span>
+              <span class="stat-value">2+</span>
               <span class="stat-label">开源项目</span>
             </div>
             <div class="stat-item">
-              <span class="stat-value">70+</span>
+              <span class="stat-value">10+</span>
               <span class="stat-label">技术文章</span>
             </div>
             <div class="stat-item">
-              <span class="stat-value">2.4K</span>
+              <span class="stat-value">23</span>
               <span class="stat-label">GitHub Stars</span>
             </div>
           </div>
@@ -284,7 +284,7 @@ const description = '流水不争先，争的是滔滔不绝';
 
     <footer>
       <div class="footer-content">
-        <span class="footer-text">© 2026 Hanshan. 用代码与咖啡构建。</span>
+        <span class="footer-text">© 2026 Hanshan. Built with code & coffee。</span>
         <div class="footer-links">
           <a href="/">首页</a>
           <a href="/articles">博客</a>
@@ -342,7 +342,19 @@ const description = '流水不争先，争的是滔滔不绝';
 
   html {
     scroll-behavior: smooth;
-    cursor: none;
+  }
+
+  @media (pointer: fine) {
+    body {
+      cursor: none;
+    }
+  }
+
+  @media (pointer: coarse) {
+    #cursor,
+    #cursor-follower {
+      display: none;
+    }
   }
 
   body {
@@ -357,17 +369,14 @@ const description = '流水不争先，争的是滔滔不绝';
   /* CURSOR */
   #cursor {
     position: fixed;
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     background: var(--accent-blue);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
-    transition:
-      width 0.2s,
-      height 0.2s,
-      background 0.2s;
+    transition: width 0.2s, height 0.2s;
     mix-blend-mode: difference;
   }
 
@@ -375,13 +384,12 @@ const description = '流水不争先，争的是滔滔不绝';
     position: fixed;
     width: 40px;
     height: 40px;
-    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9998;
     transform: translate(-50%, -50%);
     transition: all 0.12s ease;
-    mix-blend-mode: difference;
   }
 
   /* NOISE OVERLAY */
@@ -1465,44 +1473,46 @@ void main(){
   // ─── CURSOR ANIMATION ───────────────────────────────────────────
   const cur = document.getElementById('cursor');
   const fol = document.getElementById('cursor-follower');
-  let fx = 0,
-    fy = 0,
-    cx2 = 0,
-    cy2 = 0;
+  if (cur && fol) {
+    let fx = 0,
+      fy = 0,
+      cx2 = 0,
+      cy2 = 0;
 
-  document.addEventListener('mousemove', (e) => {
-    cx2 = e.clientX;
-    cy2 = e.clientY;
-    cur.style.left = cx2 + 'px';
-    cur.style.top = cy2 + 'px';
-  });
+    document.addEventListener('mousemove', (e) => {
+      cx2 = e.clientX;
+      cy2 = e.clientY;
+      cur.style.left = cx2 + 'px';
+      cur.style.top = cy2 + 'px';
+    });
 
-  function animCursor() {
-    fx += (cx2 - fx) * 0.15;
-    fy += (cy2 - fy) * 0.15;
-    fol.style.left = fx + 'px';
-    fol.style.top = fy + 'px';
-    requestAnimationFrame(animCursor);
+    function animCursor() {
+      fx += (cx2 - fx) * 0.10;
+      fy += (cy2 - fy) * 0.10;
+      fol.style.left = fx + 'px';
+      fol.style.top = fy + 'px';
+      requestAnimationFrame(animCursor);
+    }
+    animCursor();
+
+    document.querySelectorAll('a, button, input, textarea').forEach((el) => {
+      el.addEventListener('mouseenter', () => {
+        fol.style.transform = 'translate(-50%, -50%) scale(1.4)';
+        fol.style.borderColor = 'var(--accent-violet)';
+        cur.style.width = '10px';
+        cur.style.height = '10px';
+      });
+      el.addEventListener('mouseleave', () => {
+        fol.style.transform = 'translate(-50%, -50%) scale(1)';
+        fol.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+        cur.style.width = '8px';
+        cur.style.height = '8px';
+      });
+    });
   }
-  animCursor();
-
-  document.querySelectorAll('a, button').forEach((el) => {
-    el.addEventListener('mouseenter', () => {
-      cur.style.width = '24px';
-      cur.style.height = '24px';
-      fol.style.transform = 'translate(-50%, -50%) scale(1.5)';
-      fol.style.borderColor = 'rgba(96, 165, 250, 0.5)';
-    });
-    el.addEventListener('mouseleave', () => {
-      cur.style.width = '10px';
-      cur.style.height = '10px';
-      fol.style.transform = 'translate(-50%, -50%) scale(1)';
-      fol.style.borderColor = 'rgba(255, 255, 255, 0.2)';
-    });
-  });
 
   // ─── MAGNETIC EFFECT ────────────────────────────────────────────
-  document.querySelectorAll('.magnetic').forEach((el) => {
+  document.querySelectorAll('.magnetic:not(.logo)').forEach((el) => {
     el.addEventListener('mousemove', (e) => {
       const rect = el.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
